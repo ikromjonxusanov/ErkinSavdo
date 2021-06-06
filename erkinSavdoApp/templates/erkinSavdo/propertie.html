@@ -24,50 +24,33 @@
                 <div class="big">
                     <img src="{{home.image.url}}" alt="">
                 </div>
-                <div class="small">
-                    <a href="{{home.image.url}}"><img src="{{home.image.url}}" alt=""></a>
-                    <a href="{{home.image.url}}"><img src="{{home.image.url}}" alt=""></a>
-                    <a href="{{home.image.url}}"><img src="{{home.image.url}}" alt=""></a>
-                    <a href="{{home.image.url}}"><img src="{{home.image.url}}" alt=""></a>
-                    <a href="{{home.image.url}}"><img src="{{home.image.url}}" alt=""></a>
-                </div>
             </div>
         </div>
         <div class="basic padd">
-            <a class="back" href="">‹ Back to Product Page</a>
+            <a class="back" href="/">‹ Back to explore</a>
             <div class="basic_text">
 
                 <h3 class="basic_h3">{{home.title}}</h3>
-                <div class="view_eye">
-                    <i class="active fa fa-star" aria-hidden="true"></i>
-                    <i class="active fa fa-star" aria-hidden="true"></i>
-                    <i class="active fa fa-star" aria-hidden="true"></i>
-                    <i class="active fa fa-star" aria-hidden="true"></i>
-                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                </div>
-                <p class="basic_p">
-                    3 Review(s) | Add a Review
-                </p>
-                <span class="cost">{{home.price}}</span>
+                <span class="cost">{{home.priceType}} {{home.price}}</span>
                 <div class="more_about">
                     {{home.description}}
                 </div>
                 <div class="pro_about">
                     <span class="about_spn">Manzil: </span> {{home.address}}<br>
-                    <span class="about_spn">Shahar/Viloyat</span> {{home.region}}<br>
+                    <span class="about_spn">Shahar/Viloyat: </span> {{home.region}}<br>
                     <span class="about_spn">
                     {% if home.rentOrSent|length == 6 %}
-                        To'lov vaqti
+                        To'lov vaqti:
                         </span>
                         {% if home.rentOrSent|slice:'5:6' == 'w' %}
                             Haftalik to'lov
                         {% elif home.rentOrSent|slice:'5:6' == 'd' %}
                             Kunlik to'lov
-                        {% else %}
+                        {% elif home.rentOrSent|slice:'5:6' == 'm' %}
                             Oylik to'lov
                         {% endif %}
                         {% else %}
-                            Sotiladi</span>
+                            Sotiladi: </span>
                             {% if home.status %}
                                 Sotilgan
                             {% else %}
@@ -75,11 +58,7 @@
                             {% endif %}
                     {% endif %}
                     <br>
-                </div>
-            </div>
-                <div class="row">
-                <div class="col-lg-4 col-md-8 col-sm-12">
-                    <span class="about_spn">{{home.typeOfHouse}} egasiga qo'ngiriq qilish </span> <a href="tel:{{home.author.phone}}" class=" btn btn-outline-success rounded">Qo'ngiriq qilish </a>
+                    <span class="about_spn">{{home.typeOfHouse}} egasiga qo'ngiriq qilish: </span> <a href="tel:{{home.author.phone}}" class=" btn btn-outline-success rounded">Qo'ngiriq qilish </a>
 
                 </div>
             </div>
@@ -113,10 +92,7 @@
 							<i class="ion-ios-pin"></i>
 							{{object.region}}
 							<span class="{{object.rentOrSent|slice:'0:4'| lower}}">{{object.rentOrSent}}</span></span>
-						<ul class="property_list mt-3 mb-0">
-							<li class="col-lg-6"><span class="fas fa-money-bill-alt"></span> {{object.price}} $</li>
-							<br>
-						</ul>
+
 					</div>
 				</div>
 			</div>
