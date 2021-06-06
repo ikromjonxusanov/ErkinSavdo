@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block style %}
+<style>
+    @media (max-width: 991.98px){
+        .ftco-navbar-light {
+            background: rgba(0, 0, 0, 0.5) !important;
+            position: static;
+            top: 0;
+            padding: 7px 0;
+        }
+    }
+    .ftco-navbar-light {
+        background: rgba(0, 0, 0, 0.5) !important;
+        position: static;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        padding: 0;
+    }
+    body {
+        background-image: url('{% static 'images/bg_4.jpg' %}');
+        background-repeat: no-repeat;
+        background-size: cover
+    }
+    input {
+        border:1px solid #666 !important;
+    }
+    input:hover {
+        border:1px solid #5ea51d !important;
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row p-5">
+        <div class="bg-light rounded p-5">
+            <form method="POST">
+                {% csrf_token %}
+                {{form.username | as_crispy_field }}
+                <br>
+                {{form.password | as_crispy_field }}
+                <br>
+                {% if error %}
+                <p>
+                    <b class="text-danger">
+                        {{error}}
+                    </b>
+                </p>
+                {% endif %}
+
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

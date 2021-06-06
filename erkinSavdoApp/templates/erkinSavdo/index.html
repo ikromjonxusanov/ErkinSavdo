@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="slider-hero">
+	<div class="overlay"></div>
+	<div class="hero-slider">
+		<div class="item">
+			<div class="work">
+				<div class="img d-flex align-items-center js-fullheight"
+					style="background-image: url({% static 'images/bg_1.jpg' %});">
+					<div class="container-xl">
+						<div class="row justify-content-center">
+							<div class="col-md-10 col-xl-6">
+								<div class="text text-center" data-aos="fade-up" data-aos-duration="1000">
+									<h2>Your Property Is Our Priority</h2>
+									<p class="mb-5">A small river named Duden flows by their place and supplies it
+										with the necessary regelialia. It is a paradisematic country, in which
+										roasted parts of sentences fly into your mouth.</p>
+									<p><a href="e'lon berish/index.html" class="btn btn-primary px-5 py-3">Announce
+											<span class="ion ion-ios-arrow-round-forward"></span></a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="item">
+			<div class="work">
+				<div class="img d-flex align-items-center justify-content-center js-fullheight"
+					style="background-image: url({% static 'images/bg_2.jpg' %});">
+					<div class="container-xl">
+						<div class="row justify-content-center">
+							<div class="col-md-10 col-xl-6">
+								<div class="text text-center" data-aos="fade-up" data-aos-duration="1000">
+									<h2>Let Your Home Be Unique &amp; Stylist</h2>
+									<p class="mb-5">A small river named Duden flows by their place and supplies it
+										with the necessary regelialia. It is a paradisematic country, in which
+										roasted parts of sentences fly into your mouth.</p>
+									<p><a href="e'lon berish/index.html" class="btn btn-primary px-5 py-3"> Announce
+											<span class="ion ion-ios-arrow-round-forward"></span></a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="item">
+			<div class="work">
+				<div class="img d-flex align-items-center justify-content-center js-fullheight"
+					style="background-image: url({% static 'images/bg_3.jpg' %});">
+					<div class="container-xl">
+						<div class="row justify-content-center">
+							<div class="col-md-10 col-xl-6">
+								<div class="text text-center" data-aos="fade-up" data-aos-duration="1000">
+									<h2>Modern House Make Better Life</h2>
+									<p class="mb-5">A small river named Duden flows by their place and supplies it
+										with the necessary regelialia. It is a paradisematic country, in which
+										roasted parts of sentences fly into your mouth.</p>
+									<p><a href="e'lon berish/index.html" class="btn btn-primary px-5 py-3">Announce
+											<span class="ion ion-ios-arrow-round-forward"></span></a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="ftco-section bg-light">
+	<div class="container-xl">
+		<div class="row">
+			{% if homes %}
+			{% for object in homes %}
+			<div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+				<div class="property-wrap">
+					<a href="{% url 'house' object.id %}" class="img img-property" style="background-image:
+                                url('{{object.image.url}}');">
+						<p class="price"><span class="orig-price">{{object.priceType}} {{object.price}}</span></p>
+					</a>
+					<div class="text">
+
+						<h3><a href="{% url 'house' object.id %}">{{object.title}}</a></h3>
+						<p>
+							{% if object.description|length < 110 %}
+								{{object.description }}
+							{% else %}
+								{{object.description | slice:":100" }}...
+
+							{% endif %}
+
+						</p>
+						<p>
+						<span class="location">
+							<i class="ion-ios-pin"></i>
+							{{object.region}}
+							<span class="{{object.rentOrSent|slice:'0:4'| lower}}">{{object.rentOrSent}}</span></span>
+						<ul class="property_list mt-3 mb-0">
+							<li class="col-lg-6"><span class="fas fa-money-bill-alt"></span> {{object.price}} $</li>
+							<br>
+						</ul>
+						<a href="tel:{{object.author.phone}}"
+							class="mt-3 btn btn-outline-success rounded w-100">call</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{% else %}
+			<div class="alert alert-danger w-100">Hozircha uylar e'lon qilinmagan</div>
+			{% endif %}
+
+		</div>
+		<div class="row mt-5">
+			<a href="{% url 'houses' %}" class="mx-auto w-25 btn btn-outline-success">More...</a>
+		</div>
+	</div>
+</section>
+
+{% endblock %}

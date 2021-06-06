@@ -1,0 +1,261 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<section class="hero-wrap hero-wrap-2" style="background-image: url('{% static 'images/bg_4.jpg' %}');">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text align-items-center justify-content-center">
+                <div class="col-md-9 pt-5 text-center">
+                    <p class="breadcrumbs"><span class="mr-2"><a href="{% url 'home' %}">home <i
+                                    class="fa fa-chevron-right"></i></a></span> <span>houses <i
+                                class="fa fa-chevron-right"></i></span></p>
+                    <h1 class="mb-0 bread">Houses</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+<section class="ftco-section ftco-no-pb ftco-no-pt bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ftco-search d-flex justify-content-center">
+                    <div class="row">
+                        <div class="col-md-12 nav-link-wrap d-flex justify-content-center">
+                            <div class="nav nav-pills text-center" id="v-pills-tab" role="tablist"
+                                aria-orientation="vertical">
+                                <a class="nav-link active" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1"
+                                    role="tab" aria-controls="v-pills-1" aria-selected="true">Buy Properties</a>
+                                <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2"
+                                    role="tab" aria-controls="v-pills-2" aria-selected="false">Rent Properties</a>
+                            </div>
+                        </div>
+                        <div class="col-md-12 tab-wrap">
+                            <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel"
+                                    aria-labelledby="v-pills-nextgen-tab">
+                                    <form action="#" class="search-property-1">
+                                        <div class="row g-0">
+                                            <div class="col-md d-flex">
+                                                <div class="form-group p-4 border-0">
+                                                    <label for="#">Enter Keyword</label>
+                                                    <div class="form-field">
+                                                        <div class="icon"><span class="fa fa-search"></span></div>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter Keyword">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md d-flex">
+                                                <div class="form-group p-4">
+                                                    <label for="#">Property Type</label>
+                                                    <div class="form-field">
+                                                        <div class="select-wrap">
+                                                            <div class="icon"><span
+                                                                    class="fa fa-chevron-down"></span></div>
+                                                            <select name="" id="" class="form-control">
+                                                                <option value="">Residential</option>
+                                                                <option value="">Commercial</option>
+                                                                <option value="">Land</option>
+                                                                <option value="">Industrial</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md d-flex">
+                                                <div class="form-group p-4">
+                                                    <label for="#">Location</label>
+                                                    <div class="form-field">
+                                                        <div class="icon"><span class="ion-ios-pin"></span></div>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Search Location">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md d-flex">
+                                                <div class="form-group p-4">
+                                                    <label for="#">Price Limit</label>
+                                                    <div class="form-field">
+                                                        <div class="select-wrap">
+                                                            <div class="icon"><span
+                                                                    class="fa fa-chevron-down"></span></div>
+                                                            <select name="" id="" class="form-control">
+                                                                <option value="">$100</option>
+                                                                <option value="">$10,000</option>
+                                                                <option value="">$50,000</option>
+                                                                <option value="">$100,000</option>
+                                                                <option value="">$200,000</option>
+                                                                <option value="">$300,000</option>
+                                                                <option value="">$400,000</option>
+                                                                <option value="">$500,000</option>
+                                                                <option value="">$600,000</option>
+                                                                <option value="">$700,000</option>
+                                                                <option value="">$800,000</option>
+                                                                <option value="">$900,000</option>
+                                                                <option value="">$1,000,000</option>
+                                                                <option value="">$2,000,000</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md d-flex">
+                                                <div class="form-group d-flex w-100 border-0">
+                                                    <div class="form-field w-100 align-items-center d-flex">
+                                                        <input type="submit" value="Search"
+                                                            class="align-self-stretch form-control btn btn-primary">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-2" role="tabpanel"
+                                    aria-labelledby="v-pills-performance-tab">
+                                    <form action="#" class="search-property-1">
+                                        <div class="row g-0">
+                                            <div class="col-md d-flex">
+                                                <div class="form-group p-4 border-0">
+                                                    <label for="#">Enter Keyword</label>
+                                                    <div class="form-field">
+                                                        <div class="icon"><span class="fa fa-search"></span></div>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter Keyword">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md d-flex">
+                                                <div class="form-group p-4">
+                                                    <label for="#">Property Type</label>
+                                                    <div class="form-field">
+                                                        <div class="select-wrap">
+                                                            <div class="icon"><span
+                                                                    class="fa fa-chevron-down"></span></div>
+                                                            <select name="" id="" class="form-control">
+                                                                <option value="">Residential</option>
+                                                                <option value="">Commercial</option>
+                                                                <option value="">Land</option>
+                                                                <option value="">Industrial</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md d-flex">
+                                                <div class="form-group p-4">
+                                                    <label for="#">Location</label>
+                                                    <div class="form-field">
+                                                        <div class="icon"><span class="ion-ios-pin"></span></div>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Search Location">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md d-flex">
+                                                <div class="form-group p-4">
+                                                    <label for="#">Price Limit</label>
+                                                    <div class="form-field">
+                                                        <div class="select-wrap">
+                                                            <div class="icon"><span
+                                                                    class="fa fa-chevron-down"></span></div>
+                                                            <select name="" id="" class="form-control">
+                                                                <option value="">$100</option>
+                                                                <option value="">$10,000</option>
+                                                                <option value="">$50,000</option>
+                                                                <option value="">$100,000</option>
+                                                                <option value="">$200,000</option>
+                                                                <option value="">$300,000</option>
+                                                                <option value="">$400,000</option>
+                                                                <option value="">$500,000</option>
+                                                                <option value="">$600,000</option>
+                                                                <option value="">$700,000</option>
+                                                                <option value="">$800,000</option>
+                                                                <option value="">$900,000</option>
+                                                                <option value="">$1,000,000</option>
+                                                                <option value="">$2,000,000</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md d-flex">
+                                                <div class="form-group d-flex w-100 border-0">
+                                                    <div class="form-field w-100 align-items-center d-flex">
+                                                        <input type="submit" value="Search"
+                                                            class="align-self-stretch form-control btn btn-primary">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="ftco-section bg-light">
+    <div class="container-xl">
+        <div class="row">
+            {% if homes %}
+			{% for object in homes %}
+			<div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+				<div class="property-wrap">
+					<a href="{% url 'house' object.id %}" class="img img-property" style="background-image:
+                                url('{{object.image.url}}');">
+						<p class="price"><span class="orig-price">{{object.priceType}} {{object.price}}</span></p>
+					</a>
+					<div class="text">
+
+						<h3><a href="{% url 'house' object.id %}">{{object.title}}</a></h3>
+						<p>
+							{% if object.description|length < 110 %}
+								{{object.description }}
+							{% else %}
+								{{object.description | slice:":100" }}...
+
+							{% endif %}
+
+						</p>
+						<p>
+						<span class="location">
+							<i class="ion-ios-pin"></i>
+							{{object.region}}
+							<span class="{{object.rentOrSent|slice:'0:4'| lower}}">{{object.rentOrSent}}</span></span>
+						<ul class="property_list mt-3 mb-0">
+							<li class="col-lg-6"><span class="fas fa-money-bill-alt"></span> {{object.price}} $</li>
+							<br>
+						</ul>
+						<a href="tel:{{object.author.phone}}"
+							class="mt-3 btn btn-outline-success rounded w-100">call</a>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{% else %}
+			<div class="alert alert-danger w-100">Hozircha uylar e'lon qilinmagan</div>
+			{% endif %}
+
+        </div>
+        <div class="row mt-5">
+            <div class="col text-center">
+                <div class="block-27">
+                    <ul>
+                        <li><a href="#">&lt;</a></li>
+                        <li class="active"><span>1</span></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&gt;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
