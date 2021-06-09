@@ -15,6 +15,39 @@
     <div class="product_block">
         <div class="basic">
             <div class="gallarey">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+            {% for button in buttons %}
+                {% if button == 1 %}
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                {% else %}
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ button | ayirish:'1' }}" aria-label="Slide {{ button }}"></button>
+                {% endif %}
+            {% endfor %}
+                <!--<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>-->
+          </div>
+          <div class="carousel-inner">
+              {% for img in imgUrls %}
+                {% if img ==  1 %}
+                    <div class="carousel-item active">
+                      <img src="{{ postObject.picture1.url }}" width="100" height="300" class="d-block w-100" alt="...">
+                    </div>
+                {% else %}
+                    <div class="carousel-item">
+                      <img src="{{ img }}" width="100" height="300" class="d-block w-100" alt="...">
+                    </div>
+                {% endif %}
+              {% endfor %}
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
 
                 <div class="pop_img">
                     <div class="pick">
@@ -36,29 +69,38 @@
                     {{home.description}}
                 </div>
                 <div class="pro_about">
-                    <span class="about_spn">Manzil: </span> {{home.address}}<br>
-                    <span class="about_spn">Shahar/Viloyat: </span> {{home.region}}<br>
+                    <span class="about_spn">Address: </span> {{home.address}}<br>
+                    <span class="about_spn">Province/District: </span> {{home.region}}<br>
+                    <span class="about_spn">Area: </span> {{home.area}}<br>
+                    <span class="about_spn">Length of rooms: </span> {{home.lengthOfRooms}}<br>
                     <span class="about_spn">
                     {% if home.rentOrSent|length == 6 %}
-                        To'lov vaqti:
+                        Payment date:
                         </span>
                         {% if home.rentOrSent|slice:'5:6' == 'w' %}
-                            Haftalik to'lov
+                            Weeks payment
                         {% elif home.rentOrSent|slice:'5:6' == 'd' %}
-                            Kunlik to'lov
+                            Days payment
                         {% elif home.rentOrSent|slice:'5:6' == 'm' %}
-                            Oylik to'lov
+                            Month
                         {% endif %}
                         {% else %}
                             Sotiladi: </span>
                             {% if home.status %}
-                                Sotilgan
+                                Sold
                             {% else %}
-                                Sotuvda
+                                Sale
                             {% endif %}
                     {% endif %}
                     <br>
-                    <span class="about_spn">{{home.typeOfHouse}} egasiga qo'ngiriq qilish: </span> <a href="tel:{{home.author.phone}}" class=" btn btn-outline-success rounded">Qo'ngiriq qilish </a>
+                    <span class="about_spn">Owner: </span>
+                    <a href="{% url 'usersProfile' home.author.user.username %}">
+                    <img src="{{home.author.profilePicture.url}}" alt="{{home.author}}" width="30px" class="rounded">{{home.author}}
+
+                    </a>
+                    <br>
+
+                    <span class="about_spn">{{home.typeOfHouse}} call the owner: </span> <a href="tel:{{home.author.phone}}" class=" btn btn-outline-success rounded">Call </a>
 
                 </div>
             </div>
@@ -71,13 +113,13 @@
 			{% for object in rekhouses %}
 			<div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
 				<div class="property-wrap">
-					<a href="{% url 'house' object.id %}" class="img img-property" style="background-image:
+					<a href="{% url 'exploreDetail' object.id %}" class="img img-property" style="background-image:
                                 url('{{object.image.url}}');">
 						<p class="price"><span class="orig-price">{{object.priceType}} {{object.price}}</span></p>
 					</a>
 					<div class="text">
 
-						<h3><a href="{% url 'house' object.id %}">{{object.title}}</a></h3>
+						<h3><a href="{% url 'exploreDetail' object.id %}">{{object.title}}</a></h3>
 						<p>
 							{% if object.description|length < 110 %}
 								{{object.description }}

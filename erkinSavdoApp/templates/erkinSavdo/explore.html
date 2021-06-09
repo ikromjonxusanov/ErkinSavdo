@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load my_extras %}
+
+{% block content %}
+
+<div class="py-5" style=" background-image: url('/static/images/bg_4.jpg');background-repeat: no-repeat; background-size: cover;">
+    <div class="container">
+        <form method="GET">
+            <div class="row p-5 rounded" style="background-color: #dddddd">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <label>Title</label>
+                    {{ hFilter.form.title_filter | as_crispy_field }}
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <label>Address</label>
+
+                    {{ hFilter.form.address_filter | as_crispy_field }}
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <label>from Price</label>
+                    {{ hFilter.form.number_filter_gte | as_crispy_field }}
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <label>to Price</label>
+
+                    {{ hFilter.form.number_filter_lte | as_crispy_field }}
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <label>from length of rooms</label>
+                    {{ hFilter.form.lengthOfRooms_filter_gte | as_crispy_field }}
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <label>to length of rooms</label>
+                    {{ hFilter.form.lengthOfRooms_filter_lte | as_crispy_field }}
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <label>from Area</label>
+                    {{ hFilter.form.area_filter_gte | as_crispy_field }}
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <label>to Area</label>
+                    {{ hFilter.form.area_filter_lte | as_crispy_field }}
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    {{ hFilter.form.typeOfHouse | as_crispy_field }}
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    {{ hFilter.form.priceType | as_crispy_field }}
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    {{ hFilter.form.region | as_crispy_field }}
+                </div>
+                <button class="btn btn-primary rounded mt-3">Filter</button>
+            </div>
+        </form>
+    </div>
+</div>
+<section class="ftco-section bg-light">
+    <div class="container-xl">
+        <div class="row">
+            {% if homes %}
+			{% for object in homes %}
+			<div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+				<div class="property-wrap">
+					<a href="{% url 'exploreDetail' object.id %}" class="img img-property" style="background-image:
+                                url('{{object.image.url}}');">
+						<p class="price"><span class="orig-price">{{object.priceType}} {{object.price}}</span></p>
+					</a>
+					<div class="text">
+
+						<h3><a href="{% url 'exploreDetail' object.id %}">{{object.title}}</a></h3>
+						<p>
+							{% if object.description|length < 110 %}
+								{{object.description }}
+							{% else %}
+								{{object.description | slice:":100" }}...
+
+							{% endif %}
+
+						</p>
+						<p>
+						<span class="location">
+							<i class="ion-ios-pin"></i>
+							{{object.region}}
+							<span class="{{object.rentOrSent|slice:'0:4'| lower}}">{{object.rentOrSent}}</span></span>
+
+                    </div>
+				</div>
+			</div>
+			{% endfor %}
+			{% else %}
+			<div class="alert alert-danger w-100">Hozircha uylar e'lon qilinmagan</div>
+			{% endif %}
+
+        </div>
+
+{% if homes %}
+<div class="container">
+    <nav aria-label="Page navigation example" class="text-center">
+    <ul class="pagination">
+    {% if homes.has_previous %}
+        <li class="page-item">
+            <a class="page-link text-success" href="?page={{ homes.previous_page_number }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+
+    {% endif %}
+    {% for object in homes.number|pa:request %}
+
+    {% if object == homes.number %}
+    <li class="page-item disabled">
+        <a class="page-link bg-success text-white" href="?page={{object}}">{{ object }}</a>
+    </li>
+    {% else %}
+    <li class="page-item">
+        <a class="page-link text-success" href="?page={{object}}">{{ object }}</a>
+    </li>
+    {% endif %}
+
+    {% endfor %}
+
+      {% if homes.has_next %}
+        <li class="page-item">
+            <a class="page-link text-success" href="?page={{ posts.next_page_number }}" aria-label="Previous">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+
+    {% endif %}
+    </ul>
+  </nav>
+</div>
+{% endif %}
+    </div>
+</section>
+
+{% endblock %}

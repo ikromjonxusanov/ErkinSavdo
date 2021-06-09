@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'erkinSavdoApp',
     'erkinSavdoApi',
     "rest_framework",
-    'hitcount',
     'crispy_forms',
+    'django_filters',
 
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -17,3 +17,19 @@ def login_required(view_func):
         else:
             return redirect("/")
     return wrapper_func
+
+def customer_required(view_func):
+    def wrapper_func(request, *args, **kwargs):
+        if request.user.is_authenticated:
+            try:
+                customer = request.user.customer
+                return view_func(request, *args, **kwargs)
+            except:
+                return redirect("/")
+
+        else:
+            return redirect("/")
+    return wrapper_func
+
+
+

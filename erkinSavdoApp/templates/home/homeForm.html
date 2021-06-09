@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block style %}
+<style>
+    input[type=file]::-webkit-file-upload-button {
+        visibility: hidden;
+    }
+    input[type=file]{
+
+    }
+
+    input[type=file]:focus {
+        border-color: #5ea51d !important;
+    }
+    input[type=file]{
+        visibility:hidden;
+       }
+    .label-upload-image {
+    height: 45px;
+        width: 100%;
+        background: #fff;
+        color: rgba(0, 0, 0, 0.8);
+        font-size: 14px;
+        border-radius: 2px;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    label {
+    color: #000;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div style="padding-top: 70px; padding-bottom: 70px; background-image: url('/static/images/bg_4.jpg');background-repeat: no-repeat; background-size: cover;">
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row p-5" style="background-color: rgba(245, 245, 245, 0.5)">
+
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    {{form.title | as_crispy_field }}
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    {{form.price | as_crispy_field }}
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    {{form.address | as_crispy_field }}
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    {{form.region | as_crispy_field }}
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    {{form.area | as_crispy_field }}
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <label for="id_rentOrSent">Rent or Sent *</label>
+                    {{form.rentOrSent | as_crispy_field }}
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <label for="id_typeOfHouse">Type of home *</label>
+
+                    {{form.typeOfHouse | as_crispy_field }}
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <label for="id_priceType">Price type *</label>
+                    {{form.priceType | as_crispy_field }}
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <label for="id_lengthOfRooms">Length of Rooms *</label>
+                    {{form.lengthOfRooms | as_crispy_field }}
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <label>Upload image *</label>
+
+                    <label for="id_image" class="label-upload-image text-dark pl-2 pt-2">Upload image</label>
+                    {{form.image | as_crispy_field }}
+                </div>
+                <div class="col-sm-12">
+                    {{form.description | as_crispy_field }}
+                </div>
+                {# .col-lg-4.col-md-6.col-sm-6 #}
+                <div class="col-sm-12">
+                    <button type="submit" class="mt-3 btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

@@ -2,11 +2,16 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
 
 from .models import *
 from .forms import *
 from .decorators import  *
+from .filters import HomeFilter
+
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.core.paginator import Paginator
 
 # Create your views here.
 def get_object_or_404(CLass, pk):
@@ -23,19 +28,31 @@ def home(request):
             homes.append(object)
     return render(request, 'erkinSavdo/index.html', {'homes':homes})
 
-def houses(request):
+def explore(request):
     homes = Home.objects.order_by('-createDate')
-    return render(request, 'erkinSavdo/properties.html', {'homes':homes})
+    hFilter = HomeFilter(request.GET, queryset=homes)
+    homes = hFilter.qs
+    paginator = Paginator(homes, 8)
+    try:
+        page_number = request.GET.get('page')
+    except:
+        page_number = 1
+    homes = paginator.get_page(page_number)
 
-def house(request, pk):
+    return render(request, 'erkinSavdo/explore.html',
+                  {'homes':homes, 'hFilter':hFilter})
+
+def detailExplore(request, pk):
     home = get_object_or_404(Home, pk)
+
     rekHomes = []
     rekhomes = Home.objects.order_by("-createDate")
     for object in rekhomes:
         if home != object and len(rekHomes)!=4:
             rekHomes.append(object)
-    return render(request, 'erkinSavdo/propertie.html', {'home':home, 'rekhouses':rekHomes})
+    return render(request, 'erkinSavdo/exploreDetail.html', {'home':home, 'rekhouses':rekHomes})
 
+@unauthenticated
 def signup(request):
     registered = False
     if request.method == "POST":
@@ -49,6 +66,7 @@ def signup(request):
             customer = customerForm.save(commit=False)
             customer.user = user
             customer.save()
+            return redirect('login')
         else:
             messages.info(request, user_form.errors)
     else:
@@ -79,14 +97,10 @@ def user_login(request):
 
 @login_required
 def user_logout(request):
-    try:
-        del request.session['username']
-    except:
-        pass
     logout(request)
     return redirect("/")
 
-
+@customer_required
 def profile(request, username=None):
     try:
         if username != None:
@@ -98,5 +112,61 @@ def profile(request, username=None):
     except:
         return HttpResponse("404 not found")
 
+@customer_required
 def user_all_ads(request):
     return render(request, 'erkinSavdo/user-all-ads.html')
+
+@customer_required
+def addHome(request):
+    form = HomeForm()
+    if request.method == "POST":
+        form = HomeForm(request.POST, request.FILES)
+        if form.is_valid():
+            try:
+                customer = request.user.customer
+                addHome = form.save(commit=False)
+                addHome.author = customer
+                addHome.save()
+                return redirect('explore')
+            except:
+                return HttpResponse("Invalid user")
+        return HttpResponse("Invalid Value")
+    return render(request, 'home/homeForm.html', {'form':form})
+
+@customer_required
+def changeProfile(request):
+    user = request.user
+    customer = user.customer
+    userForm = ChangeUser(instance=user)
+    customerForm = CustomerForm(instance=customer)
+    if request.method == "POST":
+        userForm = ChangeUser(request.POST, instance=user)
+        customerForm = CustomerForm(request.POST, request.FILES, instance=customer)
+        if userForm.is_valid() and customerForm.is_valid():
+            userForm.save()
+            customer = customerForm.save(commit=False)
+            customer.user = user
+            customer.save()
+            return redirect('profile')
+        print(userForm.is_valid() , customerForm.is_valid())
+    return render(request, 'erkinSavdo/ChangeProfile.html', {'user_form':userForm, "customerForm":customerForm})
+
+@customer_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'change_password.html', {
+        'form': form
+    })
+
+
+

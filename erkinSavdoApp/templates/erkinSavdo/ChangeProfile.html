@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block style %}
+<style>
+    @media (max-width: 991.98px){
+        .ftco-navbar-light {
+            background: rgba(0, 0, 0, 0.5) !important;
+            position: static;
+            top: 0;
+            padding: 7px 0;
+        }
+    }
+    .ftco-navbar-light {
+        background: rgba(0, 0, 0, 0.5) !important;
+        position: static;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        padding: 0;
+    }
+    body {
+        background-image: url('{% static 'images/bg_4.jpg' %}');
+        background-repeat: no-repeat;
+        background-size: cover
+    }
+    input {
+        border:1px solid #666 !important;
+    }
+    input:hover {
+        border:1px solid #5ea51d !important;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row p-5">
+        <div class="card bg-light p-5">
+            <h1>Change password</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row text-dark">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Username</label>
+                            {{ user_form.username | as_crispy_field }}
+                          </div><br>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>First name</label>
+                            {{ user_form.first_name | as_crispy_field }}
+                          </div><br>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Last name</label>
+                            {{ user_form.last_name | as_crispy_field }}
+                          </div><br>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                    <label>Phone</label>
+                            {{ customerForm.phone | as_crispy_field }}
+                  </div><br>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                    <label>Email</label>
+                            {{ user_form.email | as_crispy_field }}
+                  </div><br>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                    <label>Picture</label>
+                            {{ customerForm.profilePicture | as_crispy_field }}
+                  </div><br>
+                    </div>
+                </div>
+
+              <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="{% url 'profile' %}" class="btn btn-outline-success">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

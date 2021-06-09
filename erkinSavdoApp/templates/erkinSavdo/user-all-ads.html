@@ -9,13 +9,13 @@
 			{% for object in user.customer.home_set.all %}
 			<div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
 				<div class="property-wrap">
-					<a href="{% url 'house' object.id %}" class="img img-property" style="background-image:
+					<a href="{% url 'exploreDetail' object.id %}" class="img img-property" style="background-image:
                                 url('{{object.image.url}}');">
 						<p class="price"><span class="orig-price">{{object.priceType}} {{object.price}}</span></p>
 					</a>
 					<div class="text">
 
-						<h3><a href="{% url 'house' object.id %}">{{object.title}}</a></h3>
+						<h3><a href="{% url 'exploreDetail' object.id %}">{{object.title}}</a></h3>
 						<p>
 							{% if object.description|length < 110 %}
 								{{object.description }}
@@ -58,7 +58,7 @@
 			{% endif %}
 
         </div>
-        <a href="#" class="btn btn-primary">Create ad</a>
+        <a href="{% url 'addHome' %}" class="btn btn-primary">add home</a>
 
     </div>
 </section>

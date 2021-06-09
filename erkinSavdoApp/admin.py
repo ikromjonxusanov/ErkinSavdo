@@ -6,4 +6,8 @@ from .models import *
 
 admin.site.register(Customer)
 admin.site.register(Home)
+admin.site.register(PriceType)
+admin.site.register(Province)
+admin.site.register(District)
+
 
