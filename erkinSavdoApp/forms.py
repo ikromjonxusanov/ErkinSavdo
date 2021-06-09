@@ -4,16 +4,19 @@ from django.forms import *
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
+from django.contrib.auth.forms import UserCreationForm
 
-class UserForm(ModelForm):
 
+class UserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password']
     def __init__(self, *args, **kwargs):
 
         super().__init__(*args, **kwargs)
         self.fields['username'].label = ""
+        self.fields['first_name'].label = ""
+        self.fields['last_name'].label = ""
         self.fields['email'].label = ""
         self.fields['password'].label = ""
         self.helper = FormHelper()

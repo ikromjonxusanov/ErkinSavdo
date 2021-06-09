@@ -41,10 +41,6 @@ def signup(request):
     if request.method == "POST":
         user_form = UserForm(data=request.POST)
         customerForm = CustomerForm(data=request.POST)
-        if 0  == len(request.POST['password']):
-            messages.info(request, "Enter the password!")
-        elif len(request.POST['password']) < 8:
-            messages.info(request, "Password min length 8")
         if user_form.is_valid() and customerForm.is_valid():
             user = user_form.save()
             user.set_password(user.password)
@@ -89,3 +85,18 @@ def user_logout(request):
         pass
     logout(request)
     return redirect("/")
+
+
+def profile(request, username=None):
+    try:
+        if username != None:
+            user = User.objects.get(username=username)
+            return render(request, 'erkinSavdo/profile.html', {'user':user})
+        else:
+            return render(request, 'erkinSavdo/profile.html')
+
+    except:
+        return HttpResponse("404 not found")
+
+def user_all_ads(request):
+    return render(request, 'erkinSavdo/user-all-ads.html')

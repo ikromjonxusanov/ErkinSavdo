@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="ftco-section bg-light">
+    <div class="container-xl">
+        <div class="row">
+            {% if user.customer.home_set.all %}
+			{% for object in user.customer.home_set.all %}
+			<div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+				<div class="property-wrap">
+					<a href="{% url 'house' object.id %}" class="img img-property" style="background-image:
+                                url('{{object.image.url}}');">
+						<p class="price"><span class="orig-price">{{object.priceType}} {{object.price}}</span></p>
+					</a>
+					<div class="text">
+
+						<h3><a href="{% url 'house' object.id %}">{{object.title}}</a></h3>
+						<p>
+							{% if object.description|length < 110 %}
+								{{object.description }}
+							{% else %}
+								{{object.description | slice:":100" }}...
+
+							{% endif %}
+
+						</p>
+						<p>
+						<span class="location">
+							<i class="ion-ios-pin"></i>
+							{{object.region}}
+							<span class="{{object.rentOrSent|slice:'0:4'| lower}}">{{object.rentOrSent}}</span></span>
+
+                    </div>
+				</div>
+			</div>
+
+
+			{% endfor %}
+             <div class="row mt-5">
+            <div class="col text-center">
+                <div class="block-27">
+                    <ul>
+                        <li><a href="#">&lt;</a></li>
+                        <li class="active"><span>1</span></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&gt;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+			{% else %}
+			<div class="alert alert-danger w-100">Not found ads</div>
+
+			{% endif %}
+
+        </div>
+        <a href="#" class="btn btn-primary">Create ad</a>
+
+    </div>
+</section>
+
+
+{% endblock %}
