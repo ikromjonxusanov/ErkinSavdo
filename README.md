@@ -1,2 +1,2 @@
-# testingStartup-ErkinSavdo
+# ErkinSavdo
 ---
