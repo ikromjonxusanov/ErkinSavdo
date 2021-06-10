@@ -50,6 +50,16 @@ def detailExplore(request, pk):
     for object in rekhomes:
         if home != object and len(rekHomes)!=4:
             rekHomes.append(object)
+    if request.method == "POST" and request.user.customer == home.author:
+        print(request.POST)
+        if request.POST.get('type').lower() == "delete":
+            home.delete()
+            return redirect('explore')
+        if request.POST.get('type').lower() == "sold":
+            home.status = True
+            home.save()
+            return redirect(f'/explore/{pk}/')
+
     return render(request, 'erkinSavdo/exploreDetail.html', {'home':home, 'rekhouses':rekHomes})
 
 @unauthenticated
@@ -132,6 +142,23 @@ def addHome(request):
                 return HttpResponse("Invalid user")
         return HttpResponse("Invalid Value")
     return render(request, 'home/homeForm.html', {'form':form})
+
+@customer_required
+def updateHome(request, pk):
+    home = get_object_or_404(Home, pk)
+    form = HomeForm(instance=home)
+    if request.method == "POST":
+        form = HomeForm(data=request.POST, files=request.FILES, instance=home)
+        if form.is_valid():
+            customer = request.user.customer
+            addHome = form.save(commit=False)
+            addHome.author = customer
+            addHome.save()
+            return redirect(f'/explore/{pk}')
+        return HttpResponse("Invalid Value")
+    return render(request, 'home/homeForm.html', {'form':form})
+
+
 
 @customer_required
 def changeProfile(request):
