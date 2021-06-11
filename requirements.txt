@@ -6,3 +6,4 @@ djangorestframework==3.12.4
 mysqlclient==2.0.3
 phonenumbers==8.12.23
 Pillow==8.2.0
+django-filter==2.4.0
