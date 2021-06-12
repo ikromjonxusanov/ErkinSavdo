@@ -1,4 +1,6 @@
-<!DOCTYPE html> {% load static %}
+<!DOCTYPE html>
+{% load i18n %}
+{% load static %}
 <html lang="en">
 
 <head>
@@ -23,53 +25,13 @@
 </head>
 
 <body>
-    {% comment %}
-    <div class="py-4 top-wrap">
-        <div class="container-xl">
-            <div class="row d-flex align-items-start">
-                <div class="col-md topper d-flex mb-md-0
-                        align-items-xl-center">
-                    <div class="icon d-flex justify-content-center
-                            align-items-center"><span class="fa fa-map"></span>
-                    </div>
-                    <div class="text pl-3 pl-md-3">
-                        <p class="con"><span>Free Call</span> <span>+1 234
-                                    456 78910</span></p>
-                        <p class="con">Call Us Now 24/7 Customer Support</p>
-                    </div>
-                </div>
-                <div class="col-md topper d-flex mb-md-0
-                        align-items-xl-center">
-                    <div class="icon d-flex justify-content-center
-                            align-items-center"><span class="fa fa-paper-plane"></span>
-                    </div>
-                    <div class="text pl-3 pl-md-3">
-                        <p class="hr"><span>Our Location</span></p>
-                        <p class="con">Suite 721 New York NY 10016</p>
-                    </div>
-                </div>
-                <div class="col-md topper d-flex mb-md-0
-                        align-items-xl-center">
-                    <div class="icon d-flex justify-content-center
-                            align-items-center"><span class="fa
-                                fa-connectdevelop"></span>
-                    </div>
-                    <div class="text pl-3 pl-md-3">
-                        <p class="con"><span>Connect </span> <span>with us</span></p>
-                        <p class="con"><a href="#">Facebook</a> <a href="#">Twitter</a>
-                            <a href="#">Dribbble</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    {% endcomment %}
   
     <nav class="m-0 navbar navbar-expand-lg  ftco-navbar-light">
 		<div class="container-xl">
 			<a class="navbar-brand align-items-center" href="/">
-				<span class="">Erkin.savdo</span>
+				<span class="">
+                {% translate "Erkin Savdo" %}
+                </span>
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,15 +39,38 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav m-auto mb-2 mb-lg-0">
-					<li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="{% url 'explore' %}">Houses</a></li>
+					<li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">
+                            {% translate "Home" %}
+                        </a>
+                    </li>
+					<li class="nav-item">
+                        <a class="nav-link" href="{% url 'explore' %}">
+                            {% translate "Explore" %}
+                        </a>
+                    </li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">My profile</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'userAllAds' %}">{{user}} all ads</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'profile' %}">
+                            {% translate "Profile" %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">
+                            {% translate "Logout" %}
+                        </a>
+                    </li>
                     {% else %}
-                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'signup' %}">Sign Up</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">
+                            {% translate "Login" %}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'signup' %}">
+                            {% translate "Sign Up" %}
+                        </a>
+                    </li>
                     {% endif %}
 				</ul>
 			</div>
@@ -99,12 +84,14 @@
                 <div class="col-md-6 col-lg">
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2 logo d-flex">
-                            <a class="navbar-brand align-items-center" href="index.html">
-                                <span class="">Oakberry <small>Real Estate
-                                            Agency</small></span>
+                            <a class="navbar-brand align-items-center" href="/">
+                                <span class="">{% translate "Erkin Savdo" %}</span>
                             </a>
                         </h2>
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+                        <p>
+                            {% translate "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dicta ea ex facere, magni officia ratione. Cumque quis rem ullam." %}
+                        </p>
+                        
                         <ul class="ftco-footer-social list-unstyled mt-2">
                             <li><a href="#"><span class="fa fa-twitter"></span></a></li>
                             <li><a href="#"><span class="fa fa-facebook"></span></a></li>
@@ -205,11 +192,11 @@
             </div>
         </div>
     </footer>
+    <script src="https://use.fontawesome.com/e86d07c339.js"></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/tiny-slider.js' %}"></script>
     <script src="{% static 'js/glightbox.min.js' %}"></script>
     <script src="{% static 'js/aos.js' %}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="{% static 'js/google-map.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
 

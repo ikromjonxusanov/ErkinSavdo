@@ -1,6 +1,6 @@
 from django import template
 from erkinSavdoApp.models import *
-from django.core.paginator import Paginator, EmptyPage
+from django.core.paginator import Paginator
 register = template.Library()
 
 # @register.filter(name="kesish")

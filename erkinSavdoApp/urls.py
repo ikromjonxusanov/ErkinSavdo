@@ -17,5 +17,5 @@ urlpatterns = [
     path('add/home/', addHome, name="addHome"),
     path('profile/change/user/', changeProfile, name="changeProfile"),
     path('profile/change/password/', change_password, name="changePassword"),
-
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+urlpatterns +=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
