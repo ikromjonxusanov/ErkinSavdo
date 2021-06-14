@@ -28,7 +28,7 @@ def customer_required(view_func):
                 return redirect("/")
 
         else:
-            return redirect("/")
+            return redirect("login")
     return wrapper_func
 
 

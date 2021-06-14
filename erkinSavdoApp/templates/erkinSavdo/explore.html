@@ -5,43 +5,49 @@
 {% load my_extras %}
 
 {% block content %}
-
+{% if homes %}
 <div class="py-5" style=" background-image: url('/static/images/bg_4.jpg');background-repeat: no-repeat; background-size: cover;">
     <div class="container">
         <form method="GET">
             <div class="row p-5 rounded" style="background-color: #dddddd">
                 <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label>Title</label>
                     {{ hFilter.form.title_filter | as_crispy_field }}
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label>Address</label>
 
-                    {{ hFilter.form.address_filter | as_crispy_field }}
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div id="div_id_address" class="form-group">
+                        <label for="id_address" class="">
+                            {% trans "Address" %}
+                        </label>
+                        <div class="">
+                            <select name="address" class="select form-control" id="id_address">
+                                <option value="" selected="">---------</option>
+                                {% if addresses %}
+                                    {% for object in addresses %}
+                                        <option value="{{object.id}}">{{object}}</option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label>from Price</label>
                     {{ hFilter.form.number_filter_gte | as_crispy_field }}
                 </div>
                 <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label>to Price</label>
 
                     {{ hFilter.form.number_filter_lte | as_crispy_field }}
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label>from length of rooms</label>
+                <div class="col-lg-4 col-md-4 col-sm-6">
                     {{ hFilter.form.lengthOfRooms_filter_gte | as_crispy_field }}
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label>to length of rooms</label>
+                <div class="col-lg-4 col-md-4 col-sm-6">
                     {{ hFilter.form.lengthOfRooms_filter_lte | as_crispy_field }}
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label>from Area</label>
+                <div class="col-lg-4 col-md-4 col-sm-6">
                     {{ hFilter.form.area_filter_gte | as_crispy_field }}
                 </div>
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <label>to Area</label>
+                <div class="col-lg-4 col-md-4 col-sm-6">
                     {{ hFilter.form.area_filter_lte | as_crispy_field }}
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
@@ -50,14 +56,15 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     {{ hFilter.form.priceType | as_crispy_field }}
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    {{ hFilter.form.region | as_crispy_field }}
+                <div>
+                    <button class="btn btn-primary rounded mt-3">{% trans "Filter" %}</button>
                 </div>
-                <button class="btn btn-primary rounded mt-3">Filter</button>
             </div>
+
         </form>
     </div>
 </div>
+{% endif %}
 <section class="ftco-section bg-light">
     <div class="container-xl">
         <div class="row">
@@ -84,21 +91,15 @@
 						<p>
 						<span class="location">
 							<i class="ion-ios-pin"></i>
-							{{object.region}}
-							<span class="{{object.rentOrSent|slice:'0:4'| lower}}">{{object.rentOrSent}}</span></span>
+							{{object.address}}
+							<span class="{{object.rentOrSale|slice:'0:4'| lower}}">{{object.rentOrSale}}</span></span>
 
                     </div>
 				</div>
 			</div>
 			{% endfor %}
-			{% else %}
-			<div class="alert alert-danger w-100">Hozircha uylar e'lon qilinmagan</div>
-			{% endif %}
-
-        </div>
-
-{% if homes %}
-<div class="container">
+            {% comment %}
+            <div class="container">
     <nav aria-label="Page navigation example" class="text-center">
     <ul class="pagination">
     {% if homes.has_previous %}
@@ -146,7 +147,16 @@
     </ul>
   </nav>
 </div>
-{% endif %}
+            {% endcomment %}
+			{% else %}
+            <div class='container'>
+			    <div class="alert alert-danger w-100">{% trans "Not found homes" %}</div>
+			</div>
+            {% endif %}
+
+        </div>
+
+
     </div>
 </section>
 

@@ -51,7 +51,7 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'profile' %}">
+                        <a class="nav-link" href="{% url 'profile' user.username %}">
                             {% translate "Profile" %}
                         </a>
                     </li>
@@ -72,6 +72,41 @@
                         </a>
                     </li>
                     {% endif %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-uppercase" id="dropdown09" data-toggle="dropdown">
+
+                            {% if current_url|slice:"1:3" == "" %}
+                            EN
+                            {% else %}
+                            {{current_url|slice:"1:3"}}
+                            {% endif %}
+
+                        </a>
+                        <form method="GET">
+                            <div style="border: none !important;" class="dropdown-menu">
+                                {% for language in languages %}
+
+
+                                    {% if language.0 == 'uz' %}
+                                    <a class="dropdown-item" href="/{{language.0}}/{{current_url|slice:'4:'}}">
+                                            <span class="flag-icon flag-icon-uz"> </span>
+                                            <span class="nav-my-link">{{language.1}}</span>
+                                    </a>
+                                    {% elif language.0 == 'en' %}
+                                        <a class="dropdown-item" href="/{{language.0}}/{{current_url|slice:'4:'}}">
+                                                <span class="flag-icon flag-icon-gb"> </span>
+                                                <span class="nav-my-link">{{language.1}}</span>
+
+                                        </a>
+
+                                    {% endif %}
+
+                                {% endfor %}
+                            </div>
+                        </form>
+
+                    </li>
+
 				</ul>
 			</div>
 		</div>
@@ -88,84 +123,64 @@
                                 <span class="">{% translate "Erkin Savdo" %}</span>
                             </a>
                         </h2>
-                        <p>
-                            {% translate "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae dicta ea ex facere, magni officia ratione. Cumque quis rem ullam." %}
-                        </p>
-                        
-                        <ul class="ftco-footer-social list-unstyled mt-2">
-                            <li><a href="#"><span class="fa fa-twitter"></span></a></li>
-                            <li><a href="#"><span class="fa fa-facebook"></span></a></li>
-                            <li><a href="#"><span class="fa fa-instagram"></span></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-2">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Offers</h2>
                         <ul class="list-unstyled">
-                            <li><a href="#"><span class="fa fa-chevron-right
-                                            mr-2"></span>Properties</a></li>
-                            <li><a href="#"><span class="fa fa-chevron-right
-                                            mr-2"></span>Agents</a></li>
-                            <li><a href="#"><span class="fa fa-chevron-right
-                                            mr-2"></span>Locations</a></li>
-                            <li><a href="#"><span class="fa fa-chevron-right
-                                            mr-2"></span>Clients
-                                        Support</a></li>
+                            <li>
+                                <a href="#">
+                                    <span class="fa fa-chevron-right mr-2"></span>
+                                    {% trans "Home" %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="fa fa-chevron-right mr-2"></span>
+                                    {% trans "Explore" %}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://t.me/erkinsavdo2021">
+                                    <span class="fa fa-telegram"></span>
+                                    t.me/ErkinSavdo2021
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://instagram.com/erkinsavdo2021/">
+                                    <span class="fa fa-instagram"></span>
+                                    @erkinsavdo2021
+                                </a>
+                            </li>
                         </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-2">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Company</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="#"><span class="fa fa-chevron-right
-                                            mr-2"></span>Home</a></li>
-                            <li><a href="#"><span class="fa fa-chevron-right
-                                            mr-2"></span>About</a></li>
-                            <li><a href="#"><span class="fa fa-chevron-right
-                                            mr-2"></span>Blog</a></li>
-                            <li><a href="#"><span class="fa fa-chevron-right
-                                            mr-2"></span>Contact
-                                        Us</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-2">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Quick Links</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="#"><span class="fa fa-chevron-right
-                                            mr-2"></span>Terms
-                                        &amp; Conditions</a></li>
-                            <li><a href="#"><span class="fa fa-chevron-right
-                                            mr-2"></span>User's
-                                        Guide</a></li>
-                            <li><a href="#"><span class="fa fa-chevron-right
-                                            mr-2"></span>Support
-                                        Center</a></li>
-                            <li><a href="#"><span class="fa fa-chevron-right
-                                            mr-2"></span>Press
-                                        Info</a></li>
-                        </ul>
+
                     </div>
                 </div>
                 <div class="col-md-6 col-lg">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Have a Questions?</h2>
+                        <h2 class="ftco-heading-2">{% trans "Have a Questions?" %}</h2>
                         <div class="block-23 mb-3">
                             <ul>
-                                <li><span class="icon fa fa-map marker"></span><span class="text">203
-                                            Fake St. Mountain View, San
-                                            Francisco, California, USA</span></li>
-                                <li><a href="#"><span class="icon fa
-                                                fa-phone"></span><span
-                                                class="text">+2 392 3929 210</span></a></li>
-                                <li><a href="#"><span class="icon fa
-                                                fa-paper-plane pr-4"></span><span
-                                                class="text"><span
-                                                    class="__cf_email__"
-                                                    data-cfemail="7f161119103f06100a0d1b10121e1611511c1012">[email&#160;protected]</span></span></a></li>
+                                <li>
+                                    <span class="icon fa fa-map marker"></span>
+                                    <span class="text">
+                                        {% trans "4 University street, Tashkent 100194, Узбекистан" %}
+                                    </span>
+                                </li>
+                                <li>
+                                    <a href="tel:+998998965610">
+                                        <span class="icon fa fa-phone"></span>
+                                        <span class="text">
+                                            <span>
+                                                +998 99 896 56 10
+                                            </span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="mailto:erkinsavdo2021@gmail.com">
+                                        <span class="icon fa fa-at pr-4"></span>
+                                        <span class="text">
+                                            <span class="__cf_email__" >erkinsavdo2021@gmail.com</span>
+                                        </span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -178,15 +193,12 @@
                     <div class="col-md-12 text-center">
                         <p class="mb-0" style="color: rgba(255,255,255,.5);
                                 font-size:
-                                13px;">Copyright &copy;
+                                13px;">{% trans "Copyright" %} &copy;
                             <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
                             <script>
                                 document.write(new Date().getFullYear());
                             </script>
-                            All rights reserved | This template is made with
-                            <i class="fa
-                                    fa-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" rel="nofollow
-                                    noopener">Colorlib</a>
+                            
                     </div>
                 </div>
             </div>

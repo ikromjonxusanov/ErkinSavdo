@@ -9,5 +9,5 @@ admin.site.register(Home)
 admin.site.register(PriceType)
 admin.site.register(Province)
 admin.site.register(District)
-
+admin.site.register(HomeType)
 

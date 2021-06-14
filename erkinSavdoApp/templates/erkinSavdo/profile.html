@@ -2,8 +2,8 @@
 {% load static %}
 {% load i18n %}
 {% block content %}
-
-  <div class="container" style="margin-top: 70px">
+<div style="background-color: #dfdfdf">
+  <div class="container pt-5">
     <div class="main-body">
       <div class="row gutters-sm">
         <div class="col-md-4 mb-3">
@@ -15,10 +15,10 @@
                 <div class="mt-3">
                   <h4>{{user}}</h4>
                   <hr>
-                  {% if request.user == user %}
-                  <a href="{% url 'userAllAds' %}" class="btn btn-primary">{{user}} all homes</a>
+                  <a href="{% url 'userAllHomes' user.username %}" class="btn btn-primary">{{user}} {% trans "all homes" %}</a>
                   <hr>
-                  <a href="{% url 'addHome' %}" class="btn btn-primary">Add home</a>
+                  {% if request.user == user %}
+                  <a href="{% url 'addHome' %}" class="btn btn-primary">{% trans "Add home" %}</a>
                   <hr>
                   {% endif %}
                 </div>
@@ -30,54 +30,64 @@
         <div class="col-md-8">
           <div class="card mb-3">
             <div class="card-body">
+            {% if user.username %}
               <div class="row">
                 <div class="col-sm-3">
-                  <h6 class="mb-0">Username</h6>
+                  <h6 class="mb-0">{% trans "Username" %}</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
                   {{user.username}}
                 </div>
               </div>
+              {%endif%}
               <hr>
+            {% if user.first_name %}
               <div class="row">
                 <div class="col-sm-3">
-                  <h6 class="mb-0">First name</h6>
+                  <h6 class="mb-0">{% trans "First name" %}</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
                   {{user.first_name}}
                 </div>
               </div>
+              {% endif %}
               <hr>
+            {% if user.last_name %}
               <div class="row">
                 <div class="col-sm-3">
-                  <h6 class="mb-0">Last name</h6>
+                  <h6 class="mb-0">{% trans "Last name" %}</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
                   {{user.last_name}}
                 </div>
               </div>
+              {% endif %}
               <hr>
+            {% if user.customer.phone %}
               <div class="row">
                 <div class="col-sm-3">
-                  <h6 class="mb-0">Phone</h6>
+                  <h6 class="mb-0">{% trans "Phone" %}</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
                   {{user.customer.phone}}
                 </div>
               </div>
+            {% endif %}
               <hr>
+            {% if user.email %}
               <div class="row">
                 <div class="col-sm-3">
-                  <h6 class="mb-0">Email</h6>
+                  <h6 class="mb-0">{% trans "Email" %}</h6>
                 </div>
                 <div class="col-sm-9 text-secondary">
                   {{user.email}}
                 </div>
               </div>
+              {% endif %}
               <hr>
               <div class="row">
                     <div class="col-sm-3">
-                      <h6 class="mb-0">Commit ads length</h6>
+                      <h6 class="mb-0">{% trans "Number of houses loaded" %}</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
                       {{user.customer.home_set.all.count}}
@@ -87,10 +97,10 @@
               {% if request.user == user %}
               <div class="row">
                 <div class="col-md-6 mb-3">
-                  <a href="{% url 'changeProfile' %}" class="w-75 btn btn-primary">Change Profile</a>
+                  <a href="{% url 'changeProfile' %}" class="w-75 btn btn-primary">{% trans "Change Profile" %}</a>
                 </div>
                 <div class="col-md-6 mb-3">
-                  <a href="{% url 'changePassword' %}" class="w-75 btn btn-primary">Change Password</a>
+                  <a href="{% url 'changePassword' %}" class="w-75 btn btn-primary">{% trans "Change Password" %}</a>
                 </div>
               </div>
               {% endif %}
@@ -100,4 +110,5 @@
       </div>
     </div>
   </div>
+</div>
 {% endblock %}

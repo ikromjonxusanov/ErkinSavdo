@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
+{% load my_extras %}
 {% block content %}
 
 <section class="ftco-section bg-light">
     <div class="container-xl">
         <div class="row">
-            {% if user.customer.home_set.all %}
-			{% for object in user.customer.home_set.all %}
+            {% if homes %}
+			{% for object in homes %}
 			<div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
 				<div class="property-wrap">
 					<a href="{% url 'exploreDetail' object.id %}" class="img img-property" style="background-image:
@@ -29,7 +30,7 @@
 						<p>
 						<span class="location">
 							<i class="ion-ios-pin"></i>
-							{{object.region}}
+							{{object.address}}
 							<span class="{{object.rentOrSent|slice:'0:4'| lower}}">{{object.rentOrSent}}</span></span>
 
                     </div>
@@ -38,29 +39,65 @@
 
 
 			{% endfor %}
-             <div class="row mt-5">
-            <div class="col text-center">
-                <div class="block-27">
-                    <ul>
-                        <li><a href="#">&lt;</a></li>
-                        <li class="active"><span>1</span></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&gt;</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+			<div class="container">
+				<nav aria-label="Page navigation example" class="text-center">
+				<ul class="pagination">
+				{% if homes.has_previous %}
+					<li class="page-item">
+						<a class="page-link text-success" href="?page={{ homes.previous_page_number }}" aria-label="Previous">
+						  <span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					{% else %}
+					<li class="page-item disabled">
+						<a class="page-link" href="#" aria-label="Previous">
+						  <span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+
+				{% endif %}
+				{% for object in homes.number|pa:request %}
+
+				{% if object == homes.number %}
+				<li class="page-item disabled">
+					<a class="page-link bg-success text-white" href="?page={{object}}">{{ object }}</a>
+				</li>
+				{% else %}
+				<li class="page-item">
+					<a class="page-link text-success" href="?page={{object}}">{{ object }}</a>
+				</li>
+				{% endif %}
+
+				{% endfor %}
+
+				  {% if homes.has_next %}
+					<li class="page-item">
+						<a class="page-link text-success" href="?page={{ posts.next_page_number }}" aria-label="Previous">
+						  <span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+					{% else %}
+					<li class="page-item disabled">
+						<a class="page-link" href="#" aria-label="Previous">
+						  <span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+
+				{% endif %}
+				</ul>
+			  </nav>
+			</div>
 			{% else %}
-			<div class="alert alert-danger w-100">Not found ads</div>
+			<div class="container">
+				<div class="alert alert-danger w-100">{% trans "Not found homes" %}</div>
+			</div>
 
 			{% endif %}
 
         </div>
-        <a href="{% url 'addHome' %}" class="btn btn-primary">add home</a>
-
+		{% if author == user %}
+        <a href="{% url 'addHome' %}" class="btn btn-primary">{% trans "Add home" %}</a>
+		{% endif %}
     </div>
 </section>
 

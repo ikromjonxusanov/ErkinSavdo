@@ -96,7 +96,7 @@
 						<p>
 						<span class="location">
 							<i class="ion-ios-pin"></i>
-							{{object.region}}
+							{{object.address}}
 							<span class="{{object.rentOrSent|slice:'0:4'| lower}}">{{object.rentOrSent}}</span></span>
 
 
@@ -105,13 +105,15 @@
 			</div>
 			{% endfor %}
 			{% else %}
-			<div class="alert alert-danger w-100">Hozircha uylar e'lon qilinmagan</div>
+			<div class="alert alert-danger w-100">{% trans "Not found homes" %}</div>
 			{% endif %}
 
 		</div>
+		{% if homes %}
 		<div class="row mt-5">
 			<a href="{% url 'explore' %}" class="mx-auto w-25 btn btn-outline-success">More...</a>
 		</div>
+		{%endif%}
 	</div>
 </section>
 

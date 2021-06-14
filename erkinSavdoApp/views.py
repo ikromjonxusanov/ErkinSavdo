@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
 from .models import *
@@ -13,58 +12,15 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.core.paginator import Paginator
 
-# Create your views here.
 def get_object_or_404(CLass, pk):
     try:
         return CLass.objects.get(id=pk)
     except:
         return HttpResponse("404 not found")
 
-def home(request):
-    queryset = Home.objects.order_by('-createDate')
-    homes = []
-    for object in queryset:
-        if len(homes) != 4:
-            homes.append(object)
-    return render(request, 'erkinSavdo/index.html', {'homes':homes})
-
-def explore(request):
-    homes = Home.objects.order_by('-createDate')
-    hFilter = HomeFilter(request.GET, queryset=homes)
-    homes = hFilter.qs
-    paginator = Paginator(homes, 8)
-    try:
-        page_number = request.GET.get('page')
-    except:
-        page_number = 1
-    homes = paginator.get_page(page_number)
-
-    return render(request, 'erkinSavdo/explore.html',
-                  {'homes':homes, 'hFilter':hFilter})
-
-def detailExplore(request, pk):
-    home = get_object_or_404(Home, pk)
-
-    rekHomes = []
-    rekhomes = Home.objects.order_by("-createDate")
-    for object in rekhomes:
-        if home != object and len(rekHomes)!=4:
-            rekHomes.append(object)
-    if request.method == "POST" and request.user.customer == home.author:
-        print(request.POST)
-        if request.POST.get('type').lower() == "delete":
-            home.delete()
-            return redirect('explore')
-        if request.POST.get('type').lower() == "sold":
-            home.status = True
-            home.save()
-            return redirect(f'/explore/{pk}/')
-
-    return render(request, 'erkinSavdo/exploreDetail.html', {'home':home, 'rekhouses':rekHomes})
 
 @unauthenticated
 def signup(request):
-    registered = False
     if request.method == "POST":
         user_form = UserForm(data=request.POST)
         customerForm = CustomerForm(data=request.POST)
@@ -72,7 +28,6 @@ def signup(request):
             user = user_form.save()
             user.set_password(user.password)
             user.save()
-            registered = True
             customer = customerForm.save(commit=False)
             customer.user = user
             customer.save()
@@ -83,7 +38,7 @@ def signup(request):
         user_form = UserForm()
         customerForm = CustomerForm()
     return render(request, 'registration/registration.html',
-                  context={'user_form': user_form, "customerForm": customerForm, "registered": registered})
+                  context={'user_form': user_form, "customerForm": customerForm})
 
 @unauthenticated
 def user_login(request):
@@ -110,21 +65,74 @@ def user_logout(request):
     logout(request)
     return redirect("/")
 
-@customer_required
-def profile(request, username=None):
+def home(request):
+    queryset = Home.objects.order_by('-createDate')
+    homes = []
+    for object in queryset:
+        if len(homes) != 4:
+            homes.append(object)
+    return render(request, 'erkinSavdo/index.html', {'homes':homes})
+
+def explore(request):
+    if str(request)[20:22] in ('uz', 'en'):
+        lan = str(request)[20:22]
+    else:
+        lan = 'en'    # language =
+    homes = Home.objects.filter(status=False).order_by('-createDate')
+    addresses = District.objects.filter(language=lan)
+    print(addresses)
+    hFilter = HomeFilter(request.GET, queryset=homes)
+    homes = hFilter.qs
+    paginator = Paginator(homes, 8)
     try:
-        if username != None:
-            user = User.objects.get(username=username)
-            return render(request, 'erkinSavdo/profile.html', {'user':user})
-        else:
-            return render(request, 'erkinSavdo/profile.html')
-
+        page_number = request.GET.get('homes_page')
     except:
-        return HttpResponse("404 not found")
+        page_number = 1
+    homes = paginator.get_page(page_number)
+
+    return render(request, 'erkinSavdo/explore.html',
+                  {'homes':homes, 'hFilter':hFilter, "addresses":addresses})
+
+def detailExplore(request, pk):
+    home = get_object_or_404(Home, pk)
+
+    rekHomes = []
+    rekhomes = Home.objects.order_by("-createDate")
+    for object in rekhomes:
+        if home != object and len(rekHomes)!=4:
+            rekHomes.append(object)
+    if request.method == "POST" and request.user.customer == home.author:
+        print(request.POST)
+        if request.POST.get('type').lower() == "delete":
+            home.delete()
+            return redirect('explore')
+        if request.POST.get('type').lower() == "sold":
+            home.status = True
+            home.save()
+            return redirect(f'/explore/{pk}/')
+
+    return render(request, 'erkinSavdo/exploreDetail.html', {'home':home, 'rekhouses':rekHomes})
 
 @customer_required
-def user_all_ads(request):
-    return render(request, 'erkinSavdo/user-all-ads.html')
+def profile(request, username):
+    user = User.objects.get(username=username)
+    return render(request, 'erkinSavdo/profile.html', {'user':user})
+
+
+@customer_required
+def user_all_homes(request, username):
+    print(username)
+    user = User.objects.get(username=username)
+    homes = user.customer.home_set.order_by('-createDate')
+    hFilter = HomeFilter(request.GET, queryset=homes)
+    homes = hFilter.qs
+    paginator = Paginator(homes, 8)
+    try:
+        page_number = request.GET.get('page')
+    except:
+        page_number = 1
+    homes = paginator.get_page(page_number)
+    return render(request, 'erkinSavdo/user-all-ads.html', {"homes":homes, 'author':user})
 
 @customer_required
 def addHome(request):

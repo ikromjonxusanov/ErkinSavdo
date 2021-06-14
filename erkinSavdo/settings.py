@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'erkinSavdoApp',
-    'erkinSavdoApi',
+    # 'erkinSavdoApi',
     "rest_framework",
     'crispy_forms',
     'django_filters',
@@ -74,6 +74,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'erkinSavdo.globals.config'
             ],
         },
     },
@@ -115,16 +116,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGES = (
-    ('en', _('English language')),
-    ('uz', _("Uzbek language")),
-    ('ru', _('Russian language')),
 
-
-
-)
-
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -139,16 +132,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-LOCAL_PATHS = (
-    os.path.join(BASE_DIR, 'locale')
+LOCALE_PATHS = (
+    BASE_DIR / 'erkinSavdoApp/locale',
 )
 
 MEDIA_URL = '/media/'
-STATICFILES_DIRS = (
-    STATIC_DIR,
+LANGUAGES = (
+    ('en', _('English language')),
+    ('uz', _("Uzbek language")),
+    # ('ru', _('Russian language')),
 )
+
 
 
 # Default primary key field type

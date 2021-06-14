@@ -27,7 +27,7 @@
             </div>
         </div>
         <div class="basic padd">
-            <a class="back" href="{% url 'explore' %}">‹ Back to explore</a>
+            <a class="back" href="{% url 'explore' %}">‹ {% trans "Back to explore" %}</a>
             <div class="basic_text">
 
                 <h3 class="basic_h3">{{home.title}}</h3>
@@ -36,66 +36,62 @@
                     {{home.description}}
                 </div>
                 <div class="pro_about">
-                    <span class="about_spn">Address: </span> {{home.address}}<br>
-                    <span class="about_spn">Province/District: </span> {{home.region}}<br>
-                    <span class="about_spn">Area: </span> {{home.area}}<br>
-                    <span class="about_spn">Length of rooms: </span> {{home.lengthOfRooms}}<br>
+                    <span class="about_spn">{% trans "Province/District" %}: </span> {{home.address}}<br>
+                    <span class="about_spn">{% trans "Home area" %}: </span> {{home.area}}<br>
+                    <span class="about_spn">{% trans "Length of rooms" %}: </span> {{home.lengthOfRooms}}<br>
                     <span class="about_spn">
                     {% if home.rentOrSent|length == 6 %}
-                        Payment date:
+                        {% trans "Lease payment term" %}:
                         </span>
                         {% if home.rentOrSent|slice:'5:6' == 'w' %}
-                            Weeks payment
+                            {% trans "Weeks payment" %}
                         {% elif home.rentOrSent|slice:'5:6' == 'd' %}
-                            Days payment
+                            {% trans "Days payment" %}
                         {% elif home.rentOrSent|slice:'5:6' == 'm' %}
-                            Month
+                            {% trans "Month" %}
                         {% endif %}
                         {% else %}
-                            Sotiladi: </span>
                             {% if home.status %}
-                                Sold
+                                {% trans "Sold" %}
                             {% else %}
-                                Sale
+                                {% trans "Sale" %}
                             {% endif %}
+                            </span>
+
                     {% endif %}
                     <br>
-                    <span class="about_spn">Owner: </span>
-                    <a href="{% url 'usersProfile' home.author.user.username %}">
+                    <span class="about_spn">{% trans "Owner" %}: </span>
+                    <a href="{% url 'userAllHomes' home.author.user.username %}">
                     <img src="{{home.author.profilePicture.url}}" alt="{{home.author}}" width="30px" class="rounded">{{home.author}}
-
                     </a>
                     <br>
                     {% if not home.status %}
-                    <span class="about_spn">{{home.typeOfHouse}} call the owner: </span> <a href="tel:{{home.author.phone}}" class=" btn btn-outline-success rounded">Call </a>
+                    <span class="about_spn">{{home.typeOfHouse}} {% trans "call the owner" %}: </span> <a href="tel:{{home.author.phone}}" class=" btn btn-outline-success rounded">Call </a>
                     {% else %}
-                    <span class="about_spn">{{home.typeOfHouse}} <b>Sold out</b></span>
+                    <span class="about_spn">{{home.typeOfHouse}} <b>{% trans "Home class" %}</b></span>
                     {% endif %}
                     {% if request.user.customer == home.author %}
                     <div class=" mt-3">
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Delete</button>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">{% trans "Delete" %}</button>
 
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">Sold out</button>
-                        <a href="{% url 'exploreDetailUpdate' home.id %}" class="btn btn-info">Edit</a>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal2">{% trans "Sold out" %}</button>
+                        <a href="{% url 'exploreDetailUpdate' home.id %}" class="btn btn-info">{% trans "Edit" %}</a>
 
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">{% trans "Delete" %} {{home}}</h5>
                                 <button type="button" class="close border border-0" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true" class=" border border-0">&times;</span>
                                 </button>
-                              </div>
-                              <div class="modal-body">
-                                <h3>Delete {{home}}</h3>
                               </div>
                               <div class="modal-footer">
                                 <form method="POST">
                                     {% csrf_token %}
                                     <input type="hidden" name="type" value="delete">
-                                    <button type="button" class="btn btn-info" data-dismiss="modal">cancel</button>
-                                    <button class="btn btn-danger">delete</button>
+                                    <button type="button" class="btn btn-info" data-dismiss="modal">{% trans "cancel" %}</button>
+                                    <button class="btn btn-danger">{% trans "delete" %}</button>
                                   </form>
                               </div>
                             </div>
@@ -105,20 +101,17 @@
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel2">Sold out</h5>
+                                <h5 class="modal-title" id="exampleModalLabel2">{% trans "Sold out" %} {{home}}</h5>
                                 <button type="button" class="close border border-0" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true" class=" border border-0">&times;</span>
                                 </button>
-                              </div>
-                              <div class="modal-body">
-                                <h3>Sold out {{home}}</h3>
                               </div>
                               <div class="modal-footer">
                                 <form method="POST">
                                     {% csrf_token %}
                                     <input type="hidden" name="type" value="sold">
-                                    <button type="button" class="btn btn-info" data-dismiss="modal">cancel</button>
-                                    <button class="btn btn-primary">Sold out</button>
+                                    <button type="button" class="btn btn-info" data-dismiss="modal">{% trans "cancel" %}</button>
+                                    <button class="btn btn-primary">{% trans "Sold out" %}</button>
                                   </form>
                               </div>
                             </div>
@@ -167,62 +160,4 @@
 
         </div>
     </div>
-{% comment %}
-
-<div class="container">
-    <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12" style="margin-top: 100px; " data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
-            <div class="property-wrap" style="background-color: #dfdfdf;">
-            <a href="#" class="img img-property" style="background-image:
-                    url('{{home.image.url}}');">
-                <p class="price"><span class="orig-price">$ {{home.price}}</span></p>
-            </a>
-            <div class="text" >
-                <h3><a href="#">{{home.title}}</a></h3>
-                <p>
-                    {{home.description}}
-                </p>
-                <p>
-                    <h5><b>Address:</b></h5>
-                </p>
-                <span class="location">
-                    <i class="ion-ios-pin"></i>
-                        {{home.region}}
-                    <span class="sale">Sale</span></span>
-                <ul class="property_list mt-3 mb-0">
-                    <li class="col-lg-6"><span class="fas fa-home"></span>{{home.area}} m<sup>2</sup></li>
-                    <li class="col-lg-6"><span class="fas fa-money-bill-alt"></span> {{home.price}} $</li>
-                    {#<br><li><span class="fas fa-eye"></span></li>#}
-                </ul>
-                <a href="tel:{{home.author.phone}}" class="mt-3 btn btn-outline-success rounded w-100">call</a>
-
-            </div>
-        </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 mt-5">
-
-            <div class="mt-5">
-               {% for object in rekhouses %}
-                    <div class="card">
-                        <div class="row no-gutters">
-                            <div class="col-auto">
-                                <img src="//placehold.it/150" class="img-fluid" alt="">
-                            </div>
-                            <div class="col">
-                                <div class="card-block px-2">
-                                    <h4 class="card-title">Title</h4>
-                                    <p class="card-text">Description</p>
-                                </div>
-                            </div>
-                        </div>
-                  </div>
-                {% endfor %}
-			</div>
-
-            </div>
-
-        </div>
-    </div>
-</div>
-{% endcomment %}
-{% endblock %}
+    {% endblock %}
