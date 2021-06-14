@@ -51,7 +51,21 @@
                     {{ hFilter.form.area_filter_lte | as_crispy_field }}
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
-                    {{ hFilter.form.typeOfHouse | as_crispy_field }}
+                    <div id="div_id_typeOfHouse" class="form-group">
+                        <label for="id_typeOfHouse" class="">
+                            {% trans "TypeOfHouse" %}
+                        </label>
+                        <div class="">
+                            <select name="typeOfHouse" class="select form-control" id="id_typeOfHouse">
+                                <option value="" selected="">---------</option>
+                                {% if hometypes %}
+                                    {% for object in hometypes %}
+                                        <option value="{{object.id}}">{{object}}</option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     {{ hFilter.form.priceType | as_crispy_field }}
@@ -98,7 +112,6 @@
 				</div>
 			</div>
 			{% endfor %}
-            {% comment %}
             <div class="container">
     <nav aria-label="Page navigation example" class="text-center">
     <ul class="pagination">
@@ -147,7 +160,6 @@
     </ul>
   </nav>
 </div>
-            {% endcomment %}
 			{% else %}
             <div class='container'>
 			    <div class="alert alert-danger w-100">{% trans "Not found homes" %}</div>

@@ -80,7 +80,7 @@ def explore(request):
         lan = 'en'    # language =
     homes = Home.objects.filter(status=False).order_by('-createDate')
     addresses = District.objects.filter(language=lan)
-    print(addresses)
+    hometypes = HomeType.objects.filter(language=lan)
     hFilter = HomeFilter(request.GET, queryset=homes)
     homes = hFilter.qs
     paginator = Paginator(homes, 8)
@@ -91,7 +91,7 @@ def explore(request):
     homes = paginator.get_page(page_number)
 
     return render(request, 'erkinSavdo/explore.html',
-                  {'homes':homes, 'hFilter':hFilter, "addresses":addresses})
+                  {'homes':homes, 'hFilter':hFilter, "addresses":addresses, "hometypes":hometypes})
 
 def detailExplore(request, pk):
     home = get_object_or_404(Home, pk)

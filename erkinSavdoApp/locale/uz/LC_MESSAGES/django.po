@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-14 08:28+0500\n"
-"PO-Revision-Date: 2021-06-14 08:29+0500\n"
+"POT-Creation-Date: 2021-06-14 21:12+0500\n"
+"PO-Revision-Date: 2021-06-14 21:15+0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: uz\n"
@@ -16,33 +16,33 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0\n"
 
-#: .\erkinSavdoApp\filters.py:6 .\erkinSavdoApp\forms.py:63
+#: .\erkinSavdoApp\filters.py:7 .\erkinSavdoApp\forms.py:63
 msgid "Title"
 msgstr "Sarlavha"
 
-#: .\erkinSavdoApp\filters.py:7
+#: .\erkinSavdoApp\filters.py:8
 msgid "Min price"
 msgstr "Minimal narx"
 
-#: .\erkinSavdoApp\filters.py:8
+#: .\erkinSavdoApp\filters.py:9
 msgid "Max price"
 msgstr "Maksimal narx"
 
-#: .\erkinSavdoApp\filters.py:9
+#: .\erkinSavdoApp\filters.py:10
 msgid "Min length rooms"
 msgstr "Minumum xonalar soni"
 
-#: .\erkinSavdoApp\filters.py:10
+#: .\erkinSavdoApp\filters.py:11
 msgid "Max length rooms"
 msgstr "Maksimal xonalar soni"
 
-#: .\erkinSavdoApp\filters.py:11
+#: .\erkinSavdoApp\filters.py:12
 msgid "Min home area"
 msgstr "Minimal uy maydoni kv²"
 
-#: .\erkinSavdoApp\filters.py:12
+#: .\erkinSavdoApp\filters.py:13
 msgid "Max home area"
 msgstr "Maksimal uy maydoni kv²"
 
@@ -89,7 +89,7 @@ msgid "Price"
 msgstr "Narx"
 
 #: .\erkinSavdoApp\forms.py:66
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:39
+#: .\erkinSavdoApp\templates\erkinSavdo\explore.html:20
 msgid "Address"
 msgstr "Manjil"
 
@@ -98,7 +98,7 @@ msgid "Image"
 msgstr "Rasm"
 
 #: .\erkinSavdoApp\forms.py:68
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:41
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:40
 msgid "Home area"
 msgstr "Uy maydoni kv²"
 
@@ -119,17 +119,17 @@ msgid "Rooms length"
 msgstr "Xonalar soni"
 
 #: .\erkinSavdoApp\templates\base.html:33
-#: .\erkinSavdoApp\templates\base.html:88
+#: .\erkinSavdoApp\templates\base.html:123
 msgid "Erkin Savdo"
 msgstr ""
 
 #: .\erkinSavdoApp\templates\base.html:44
-#: .\erkinSavdoApp\templates\base.html:95
+#: .\erkinSavdoApp\templates\base.html:130
 msgid "Home"
 msgstr "Bosh sahifa"
 
 #: .\erkinSavdoApp\templates\base.html:49
-#: .\erkinSavdoApp\templates\base.html:101
+#: .\erkinSavdoApp\templates\base.html:136
 msgid "Explore"
 msgstr "Qidirish"
 
@@ -149,17 +149,17 @@ msgstr "Kirish"
 msgid "Sign Up"
 msgstr "Ro'yxatdan o'tish"
 
-#: .\erkinSavdoApp\templates\base.html:122
+#: .\erkinSavdoApp\templates\base.html:157
 msgid "Have a Questions?"
-msgstr ""
+msgstr "Savolingiz bormi?"
 
-#: .\erkinSavdoApp\templates\base.html:128
+#: .\erkinSavdoApp\templates\base.html:163
 msgid "4 University street, Tashkent 100194, Узбекистан"
-msgstr ""
+msgstr "Universitet ko'chasi, 4, Toshkent, 100194, Uzbekistan"
 
-#: .\erkinSavdoApp\templates\base.html:161
+#: .\erkinSavdoApp\templates\base.html:196
 msgid "Copyright"
-msgstr ""
+msgstr "Copyright"
 
 #: .\erkinSavdoApp\templates\change_password.html:8
 msgid "Change password"
@@ -181,13 +181,17 @@ msgstr "Yuborish"
 msgid "Change Profile"
 msgstr "Profil ma'lumotlarini almashtirish"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\explore.html:46
+#: .\erkinSavdoApp\templates\erkinSavdo\explore.html:56
+msgid "TypeOfHouse"
+msgstr "Uy turi"
+
+#: .\erkinSavdoApp\templates\erkinSavdo\explore.html:74
 msgid "Filter"
 msgstr "Filtr"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\explore.html:87
-#: .\erkinSavdoApp\templates\erkinSavdo\index.html:108
-#: .\erkinSavdoApp\templates\erkinSavdo\user-all-ads.html:57
+#: .\erkinSavdoApp\templates\erkinSavdo\explore.html:165
+#: .\erkinSavdoApp\templates\erkinSavdo\index.html:102
+#: .\erkinSavdoApp\templates\erkinSavdo\user-all-ads.html:92
 msgid "Not found homes"
 msgstr "Uylar topilmadi"
 
@@ -195,80 +199,98 @@ msgstr "Uylar topilmadi"
 msgid "Back to explore"
 msgstr "Qidirish sahifasiga qaytish"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:40
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:39
 msgid "Province/District"
 msgstr "Viloyat / tuman"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:42
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:41
 msgid "Length of rooms"
 msgstr "Xonalar soni"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:45
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:44
 msgid "Lease payment term"
 msgstr "Ijara  to'lash muddati"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:48
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:47
 msgid "Weeks payment"
 msgstr "Haftalik to'lov"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:50
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:49
 msgid "Days payment"
 msgstr "Kunlik to'ov"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:52
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:51
 msgid "Month"
 msgstr "Oylik to'lov"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:56
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:55
 msgid "Sold"
 msgstr "Sotilgan"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:58
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:57
 msgid "Sale"
 msgstr "Sotuvda"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:64
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:63
 msgid "Owner"
 msgstr "Egasi"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:70
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:69
 msgid "call the owner"
 msgstr "Egasiga qo'ng'iroq qilish"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:72
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:71
 msgid "Home class"
 msgstr "Uy turi"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:76
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:85
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:75
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:84
 msgid "Delete"
 msgstr "O'chirish"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:78
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:105
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:115
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:77
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:104
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:114
 msgid "Sold out"
 msgstr "Sotilib bo'ldi"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:79
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:78
 msgid "Edit"
 msgstr "Tahrirlash"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:94
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:114
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:93
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:113
 msgid "cancel"
 msgstr "bekor qilish"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:95
+#: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:94
 msgid "delete"
 msgstr "o'chirish"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\profile.html:19
+#: .\erkinSavdoApp\templates\erkinSavdo\index.html:16
+msgid "Your Property Is Our Priority"
+msgstr "Sizning mulkingiz bizning ustuvorligimizdir"
+
+#: .\erkinSavdoApp\templates\erkinSavdo\index.html:18
+#: .\erkinSavdoApp\templates\erkinSavdo\index.html:36
+#: .\erkinSavdoApp\templates\erkinSavdo\index.html:56
+msgid "Announce"
+msgstr "E'lon qiling"
+
+#: .\erkinSavdoApp\templates\erkinSavdo\index.html:35
+msgid "Let Your Home Be Unique & Stylist"
+msgstr "Uyingiz noyob va stilist bo'lsin"
+
+#: .\erkinSavdoApp\templates\erkinSavdo\index.html:54
+msgid "Modern House Make Better Life"
+msgstr "Zamonaviy uy yaxshi hayot kechiradi"
+
+#: .\erkinSavdoApp\templates\erkinSavdo\profile.html:18
 msgid "all homes"
 msgstr "hamma uylari"
 
 #: .\erkinSavdoApp\templates\erkinSavdo\profile.html:21
-#: .\erkinSavdoApp\templates\erkinSavdo\user-all-ads.html:62
+#: .\erkinSavdoApp\templates\erkinSavdo\user-all-ads.html:99
 msgid "Add home"
 msgstr "Uy qo'shish"
 
@@ -289,11 +311,11 @@ msgstr "Ro'yxatdan o'tish"
 msgid "Register"
 msgstr "Ro'yxatdan o'tish"
 
-#: .\erkinSavdo\settings.py:141
+#: .\erkinSavdo\settings.py:142
 msgid "English language"
 msgstr "Ingliz tili"
 
-#: .\erkinSavdo\settings.py:142
+#: .\erkinSavdo\settings.py:143
 msgid "Uzbek language"
 msgstr "O'zbek tili"
 

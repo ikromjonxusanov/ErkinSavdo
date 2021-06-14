@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'erkinSavdoApp',
-    # 'erkinSavdoApi',
+    'erkinSavdoApi',
     "rest_framework",
     'crispy_forms',
     'django_filters',

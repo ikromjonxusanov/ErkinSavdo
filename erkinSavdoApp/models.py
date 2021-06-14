@@ -4,13 +4,13 @@ from phonenumber_field.modelfields import PhoneNumberField
 # Create your models here.
 
 class Province(Model):
-    language = CharField(max_length=255, choices=(('uz', "UZ"), ('ru', 'RU'), ('en', 'EN')))
+    language = CharField(max_length=255, choices=(('uz', "UZ"),  ('en', 'EN')))
     name = CharField(max_length=255)
     def __str__(self):
         return self.name
 
 class District(Model):
-    language = CharField(max_length=255, choices=(('uz', "UZ"), ('ru', 'RU'), ('en', 'EN')))
+    language = CharField(max_length=255, choices=(('uz', "UZ"), ('en', 'EN')))
     province = ForeignKey(Province, on_delete=CASCADE)
     name = CharField(max_length=255)
     def __str__(self):
@@ -22,7 +22,7 @@ class PriceType(Model):
         return self.name
 
 class HomeType(Model):
-    language = CharField(max_length=255, choices=(('uz', "UZ"), ('ru', 'RU'), ('en', 'EN')))
+    language = CharField(max_length=255, choices=(('uz', "UZ"), ('en', 'EN')))
     name = CharField(max_length=255)
     def __str__(self):
         return self.name

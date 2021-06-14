@@ -61,7 +61,7 @@
                     {% endif %}
                     <br>
                     <span class="about_spn">{% trans "Owner" %}: </span>
-                    <a href="{% url 'userAllHomes' home.author.user.username %}">
+                    <a href="{% url 'profile' home.author.user.username %}">
                     <img src="{{home.author.profilePicture.url}}" alt="{{home.author}}" width="30px" class="rounded">{{home.author}}
                     </a>
                     <br>
