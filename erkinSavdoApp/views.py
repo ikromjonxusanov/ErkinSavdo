@@ -77,7 +77,7 @@ def explore(request):
     if str(request)[20:22] in ('uz', 'en'):
         lan = str(request)[20:22]
     else:
-        lan = 'en'    # language =
+        lan = 'en'
     homes = Home.objects.filter(status=False).order_by('-createDate')
     addresses = District.objects.filter(language=lan)
     hometypes = HomeType.objects.filter(language=lan)
@@ -91,7 +91,7 @@ def explore(request):
     homes = paginator.get_page(page_number)
 
     return render(request, 'erkinSavdo/explore.html',
-                  {'homes':homes, 'hFilter':hFilter, "addresses":addresses, "hometypes":hometypes})
+                  {'homes':homes, 'hFilter':hFilter, "addresses":addresses, "hometypes":hometypes, 'priceType':PriceType.objects.all()})
 
 def detailExplore(request, pk):
     home = get_object_or_404(Home, pk)
@@ -132,10 +132,15 @@ def user_all_homes(request, username):
     except:
         page_number = 1
     homes = paginator.get_page(page_number)
-    return render(request, 'erkinSavdo/user-all-ads.html', {"homes":homes, 'author':user})
+    return render(request, 'erkinSavdo/user-all-homes.html', {"homes":homes, 'author':user})
 
 @customer_required
 def addHome(request):
+    if str(request)[20:22] in ('uz', 'en'):
+        lan = str(request)[20:22]
+    else:
+        lan = 'en'
+    addresses = District.objects.filter(language=lan)
     form = HomeForm()
     if request.method == "POST":
         form = HomeForm(request.POST, request.FILES)
@@ -149,13 +154,22 @@ def addHome(request):
             except:
                 return HttpResponse("Invalid user")
         return HttpResponse("Invalid Value")
-    return render(request, 'home/homeForm.html', {'form':form})
+    return render(request, 'home/homeForm.html', {
+        'form':form,
+        "addresses":addresses,
+        "typeOfHouses":HomeType.objects.filter(language=lan)})
 
 @customer_required
 def updateHome(request, pk):
+    if str(request)[20:22] in ('uz', 'en'):
+        lan = str(request)[20:22]
+    else:
+        lan = 'en'
+    addresses = District.objects.filter(language=lan)
     home = get_object_or_404(Home, pk)
     form = HomeForm(instance=home)
     if request.method == "POST":
+        print(request.POST)
         form = HomeForm(data=request.POST, files=request.FILES, instance=home)
         if form.is_valid():
             customer = request.user.customer
@@ -164,7 +178,7 @@ def updateHome(request, pk):
             addHome.save()
             return redirect(f'/explore/{pk}')
         return HttpResponse("Invalid Value")
-    return render(request, 'home/homeForm.html', {'form':form})
+    return render(request, 'home/homeForm.html', {'form':form, "addresses":addresses, 'home':home, "typeOfHouses":HomeType.objects.filter(language=lan)})
 
 
 

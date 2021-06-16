@@ -15,14 +15,7 @@ class HomeFilter(FilterSet):
         model = Home
         fields = "__all__"
         exclude = ['author', 'title', 'description', 'area', 'image', 'price', 'lengthOfRooms', 'status']
-        filter_overrides = {
-            BooleanField: {
-                'filter_class': BooleanFilter,
-                'extra': lambda f: {
-                    'widget': CheckboxInput,
-                },
-            },
-        }
+
 
 
 

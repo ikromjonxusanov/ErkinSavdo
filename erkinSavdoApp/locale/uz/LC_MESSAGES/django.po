@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-14 21:12+0500\n"
-"PO-Revision-Date: 2021-06-14 21:15+0500\n"
+"POT-Creation-Date: 2021-06-16 06:04+0500\n"
+"PO-Revision-Date: 2021-06-16 06:03+0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: uz\n"
@@ -17,6 +17,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.0\n"
+
+#: .\erkinSavdo\settings.py:142
+msgid "English language"
+msgstr "Ingliz tili"
+
+#: .\erkinSavdo\settings.py:143
+msgid "Uzbek language"
+msgstr "O'zbek tili"
 
 #: .\erkinSavdoApp\filters.py:7 .\erkinSavdoApp\forms.py:63
 msgid "Title"
@@ -32,7 +40,7 @@ msgstr "Maksimal narx"
 
 #: .\erkinSavdoApp\filters.py:10
 msgid "Min length rooms"
-msgstr "Minumum xonalar soni"
+msgstr "Minimal xonalar soni"
 
 #: .\erkinSavdoApp\filters.py:11
 msgid "Max length rooms"
@@ -90,8 +98,9 @@ msgstr "Narx"
 
 #: .\erkinSavdoApp\forms.py:66
 #: .\erkinSavdoApp\templates\erkinSavdo\explore.html:20
+#: .\erkinSavdoApp\templates\home\homeForm.html:22
 msgid "Address"
-msgstr "Manjil"
+msgstr "Manzil"
 
 #: .\erkinSavdoApp\forms.py:67
 msgid "Image"
@@ -111,6 +120,7 @@ msgid "Home type"
 msgstr "Uy turi"
 
 #: .\erkinSavdoApp\forms.py:71
+#: .\erkinSavdoApp\templates\erkinSavdo\explore.html:73
 msgid "Price type"
 msgstr "Pul turi"
 
@@ -172,6 +182,7 @@ msgstr "Bekor qilish"
 
 #: .\erkinSavdoApp\templates\change_password.html:15
 #: .\erkinSavdoApp\templates\erkinSavdo\ChangeProfile.html:77
+#: .\erkinSavdoApp\templates\home\homeForm.html:105
 #: .\erkinSavdoApp\templates\registration\login.html:56
 msgid "Submit"
 msgstr "Yuborish"
@@ -185,11 +196,11 @@ msgstr "Profil ma'lumotlarini almashtirish"
 msgid "TypeOfHouse"
 msgstr "Uy turi"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\explore.html:74
+#: .\erkinSavdoApp\templates\erkinSavdo\explore.html:88
 msgid "Filter"
 msgstr "Filtr"
 
-#: .\erkinSavdoApp\templates\erkinSavdo\explore.html:165
+#: .\erkinSavdoApp\templates\erkinSavdo\explore.html:179
 #: .\erkinSavdoApp\templates\erkinSavdo\index.html:102
 #: .\erkinSavdoApp\templates\erkinSavdo\user-all-ads.html:92
 msgid "Not found homes"
@@ -252,7 +263,7 @@ msgstr "O'chirish"
 #: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:104
 #: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:114
 msgid "Sold out"
-msgstr "Sotilib bo'ldi"
+msgstr "Sotildi"
 
 #: .\erkinSavdoApp\templates\erkinSavdo\exploreDetail.html:78
 msgid "Edit"
@@ -302,6 +313,12 @@ msgstr "Yuklangan uylar soni"
 msgid "Change Password"
 msgstr "Parolni o'zgartirish"
 
+#: .\erkinSavdoApp\templates\home\homeForm.html:61
+#, fuzzy
+#| msgid "Home type"
+msgid "Home Type"
+msgstr "Uy turi"
+
 #: .\erkinSavdoApp\templates\registration\login.html:57
 #: .\erkinSavdoApp\templates\registration\registration.html:42
 msgid "Registration"
@@ -310,14 +327,6 @@ msgstr "Ro'yxatdan o'tish"
 #: .\erkinSavdoApp\templates\registration\registration.html:68
 msgid "Register"
 msgstr "Ro'yxatdan o'tish"
-
-#: .\erkinSavdo\settings.py:142
-msgid "English language"
-msgstr "Ingliz tili"
-
-#: .\erkinSavdo\settings.py:143
-msgid "Uzbek language"
-msgstr "O'zbek tili"
 
 #~ msgid "Commit homes length"
 #~ msgstr "Xonalar soni"

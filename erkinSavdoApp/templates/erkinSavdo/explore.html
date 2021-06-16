@@ -68,7 +68,21 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
-                    {{ hFilter.form.priceType | as_crispy_field }}
+                    <div id="div_id_priceType" class="form-group">
+                        <label for="id_priceType" class="">
+                            {% trans "Price type" %}
+                        </label>
+                        <div class="">
+                            <select name="priceType" class="select form-control" id="id_priceType">
+                                <option value="" selected="">---------</option>
+                                {% if priceType %}
+                                    {% for object in priceType %}
+                                        <option value="{{object.id}}">{{object}}</option>
+                                    {% endfor %}
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <button class="btn btn-primary rounded mt-3">{% trans "Filter" %}</button>
