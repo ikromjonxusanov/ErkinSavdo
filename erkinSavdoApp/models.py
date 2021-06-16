@@ -1,6 +1,8 @@
 from django.db.models import *
 from django.contrib.auth.models import User
 from phonenumber_field.modelfields import PhoneNumberField
+from django.core.validators import MinLengthValidator, MaxLengthValidator, MinValueValidator
+
 # Create your models here.
 
 class Province(Model):
@@ -38,14 +40,14 @@ class Home(Model):
     author = ForeignKey(Customer, on_delete=CASCADE, null=True)
     title = CharField(max_length=255)
     description = TextField()
-    price = FloatField()
+    price = FloatField(validators=[MinValueValidator(0)])
     address = ForeignKey(District, on_delete=SET_NULL, null=True)
     image = ImageField(upload_to="home/images", default='default-home.png')
-    area = FloatField(default=0)
+    area = FloatField(default=0, validators=[MinValueValidator(0)])
     rentOrSale = CharField(max_length=255, choices=(('Sale', 'Sale'), ('Rent m', 'Rent month'), ('Rent w', 'Rent week'), ('Rent d', 'Rent day'), ))
     typeOfHouse = ForeignKey(HomeType, on_delete=SET_NULL, null=True)
     priceType = ForeignKey(PriceType, on_delete=SET_NULL, null=True)
-    lengthOfRooms = IntegerField(default=0, null=True)
+    lengthOfRooms = IntegerField(default=0, null=True, validators=[MinValueValidator(0)])
     status = BooleanField(default=False)
     createDate = DateTimeField(auto_now_add=True)
 

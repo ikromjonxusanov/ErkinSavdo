@@ -30,6 +30,11 @@ class HomeSerializer(ModelSerializer):
         model = Home
         fields = "__all__"
 
+class HomeTypeSerializer(ModelSerializer):
+    class Meta:
+        model = HomeType
+        fields = "__all__"
+
 
 class UserSerializer(ModelSerializer):
     class Meta:

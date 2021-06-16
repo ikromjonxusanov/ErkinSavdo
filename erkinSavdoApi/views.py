@@ -10,6 +10,7 @@ from rest_framework import status
 from rest_framework.generics import GenericAPIView, UpdateAPIView
 from rest_framework.mixins import ListModelMixin, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
 ##
+from .pagination import *
 
 def get_object_or_404(model, pk):
     try:
@@ -20,6 +21,8 @@ def get_object_or_404(model, pk):
 class CustomerGenericMixins(GenericAPIView, ListModelMixin, CreateModelMixin, UpdateModelMixin, RetrieveModelMixin, DestroyModelMixin):
     serializer_class = CustomerSerializer
     queryset = Customer.objects.all()
+    pagination_class = NormalPaginator
+
     def get(self, request, pk=None):
         if pk:
             return self.retrieve(request)
@@ -37,6 +40,8 @@ class CustomerGenericMixins(GenericAPIView, ListModelMixin, CreateModelMixin, Up
 class ProvinceGenericMixins(GenericAPIView, ListModelMixin, CreateModelMixin, UpdateModelMixin, RetrieveModelMixin, DestroyModelMixin):
     serializer_class = ProvinceSerializer
     queryset = Province.objects.all()
+    pagination_class = NormalPaginator
+
     def get(self, request, pk=None):
         if pk:
             return self.retrieve(request)
@@ -54,6 +59,8 @@ class ProvinceGenericMixins(GenericAPIView, ListModelMixin, CreateModelMixin, Up
 class DistrictGenericMixins(GenericAPIView, ListModelMixin, CreateModelMixin, UpdateModelMixin, RetrieveModelMixin, DestroyModelMixin):
     serializer_class = DistrictSerializer
     queryset = District.objects.all()
+    pagination_class = LargePaginator
+
     def get(self, request, pk=None):
         if pk:
             return self.retrieve(request)
@@ -71,6 +78,7 @@ class DistrictGenericMixins(GenericAPIView, ListModelMixin, CreateModelMixin, Up
 class PriceTypeGenericMixins(GenericAPIView, ListModelMixin, CreateModelMixin, UpdateModelMixin, RetrieveModelMixin, DestroyModelMixin):
     serializer_class = PriceTypeSerializer
     queryset = PriceType.objects.all()
+    pagination_class = NormalPaginator
     def get(self, request, pk=None):
         if pk:
             return self.retrieve(request)
@@ -88,6 +96,26 @@ class PriceTypeGenericMixins(GenericAPIView, ListModelMixin, CreateModelMixin, U
 class HomeGenericMixins(GenericAPIView, ListModelMixin, CreateModelMixin, UpdateModelMixin, RetrieveModelMixin, DestroyModelMixin):
     serializer_class = HomeSerializer
     queryset = Home.objects.all()
+    pagination_class = HomePaginator
+    def get(self, request, pk=None):
+        if pk:
+            return self.retrieve(request)
+        else:
+            return self.list(request)
+    def post(self, request):
+        return self.create(request)
+
+    def put(self, request, pk=None):
+        return self.update(request, pk)
+
+    def delete(self, request, pk=None):
+        return self.destroy(request, pk)
+
+class HomeTypeGenericMixins(GenericAPIView, ListModelMixin, CreateModelMixin, UpdateModelMixin, RetrieveModelMixin, DestroyModelMixin):
+    serializer_class = HomeTypeSerializer
+    queryset = HomeType.objects.all()
+    pagination_class = NormalPaginator
+
     def get(self, request, pk=None):
         if pk:
             return self.retrieve(request)

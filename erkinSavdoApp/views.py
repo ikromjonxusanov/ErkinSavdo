@@ -145,15 +145,12 @@ def addHome(request):
     if request.method == "POST":
         form = HomeForm(request.POST, request.FILES)
         if form.is_valid():
-            try:
-                customer = request.user.customer
-                addHome = form.save(commit=False)
-                addHome.author = customer
-                addHome.save()
-                return redirect('explore')
-            except:
-                return HttpResponse("Invalid user")
-        return HttpResponse("Invalid Value")
+            customer = request.user.customer
+            addHome = form.save(commit=False)
+            addHome.author = customer
+            addHome.save()
+            return redirect('explore')
+
     return render(request, 'home/homeForm.html', {
         'form':form,
         "addresses":addresses,
