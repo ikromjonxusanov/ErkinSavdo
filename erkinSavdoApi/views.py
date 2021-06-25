@@ -11,6 +11,25 @@ from rest_framework.generics import GenericAPIView, UpdateAPIView
 from rest_framework.mixins import ListModelMixin, CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
 ##
 from .pagination import *
+def apiHome(request):
+    urlname = [
+        '/api/customers/',
+        '/api/customers/1/',
+        '/api/provinces/',
+        '/api/provinces/1/',
+        '/api/districts/',
+        '/api/districts/1/',
+        '/api/price-types/',
+        '/api/price-types/1/',
+        '/api/homes/',
+        '/api/homes/1/',
+        '/api/home-types',
+        '/api/home-types/1/',
+        '/api/users/',
+        '/api/users/1/',
+    ]
+
+    return render(request, 'api/api-urls.html', {'urlname':urlname})
 
 def get_object_or_404(model, pk):
     try:

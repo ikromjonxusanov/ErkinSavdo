@@ -1,0 +1,28 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <table class="table mx-auto" style="width: 18rem">
+            <thead class="bg-danger text-white">
+            <tr>
+                <th>Url name</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for object in urlname %}
+                <tr>
+                    <td class="pl-5"><a class="text-danger" href="{{object}}">{{object}}</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</body>
+</html>
