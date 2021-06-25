@@ -1,1 +1,1 @@
-web: guicorn erkinSavdo.wsgi --log-file -
+web: gunicorn erkinSavdo.wsgi --log-file -
